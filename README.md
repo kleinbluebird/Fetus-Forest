@@ -232,13 +232,17 @@ Assets/_Project/VFX/**/*.mkv
 
 **Download**
 
-![Screenshot](README/Screenshot_4.png)
+<p align="center">
+  <img src="README/Screenshot_4.png" width="60%" />
+</p>
 
 - 选择Current Branch为main，点击Fetch origin
 
 **Upload**
 
-![Screenshot](README/Screenshot_5.png)
+<p align="center">
+  <img src="README/Screenshot_5.png" width="60%" />
+</p>
 
 - 勾选想要同步的Changes项，填写Summary，点击Commit to **main**（也可以改变Current Branch到分支，分支管理细节依据后续项目需求）
 - 每次更新内容后建议Commit到分支先，确认无误后再合并到main
@@ -256,11 +260,15 @@ Assets/_Project/VFX/**/*.mkv
 
 以下插件可能需要手动安装，可以在Unity-Window-Package Manager内Double Check
 
-![Screenshot](README/Screenshot_7.png)
+<p align="center">
+  <img src="README/Screenshot_7.png" width="60%" />
+</p>
 
 1. Visual Effect Graph - 支持VFX
     
-    ![Screenshot](README/Screenshot_8.png)
+    <p align="center">
+  <img src="README/Screenshot_8.png" width="60%" />
+</p>
     
 
 ---
@@ -269,9 +277,13 @@ Assets/_Project/VFX/**/*.mkv
 
 1. MK Toon Shaders
     
-    ![Screenshot](README/Screenshot_9.png)
+    <p align="center">
+  <img src="README/Screenshot_9.png" width="60%" />
+</p>
     
 
 1. SC Post Effects Pack
 
-![Screenshot](README/Screenshot_10.png)
+<p align="center">
+  <img src="README/Screenshot_10.png" width="60%" />
+</p>
