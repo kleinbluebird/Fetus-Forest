@@ -1,7 +1,6 @@
 # FF项目管理手册
 
-Question Create: March 30, 2025
-Status: Done
+Latest Updated: April 5,2025
 
 # 项目评估
 
