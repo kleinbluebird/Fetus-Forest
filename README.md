@@ -111,9 +111,8 @@ Assets/_Project/VFX/**/*.mkv
 
 ### 首次下载Repository
 
-![Screenshot 2025-03-30 at 16.29.25.png](FF%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86%E6%89%8B%E5%86%8C%201c6249c2bd7e80198332ed478bd06ed5/Screenshot_2025-03-30_at_16.29.25.png)
-
-![Screenshot 2025-03-30 at 16.30.27.png](FF%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86%E6%89%8B%E5%86%8C%201c6249c2bd7e80198332ed478bd06ed5/Screenshot_2025-03-30_at_16.30.27.png)
+![Screenshot](README/screenshot_1.png)
+![Screenshot](README/screenshot_2.png)
 
 - 按照上述操作后Local Path下会新建一个用于GitHub同步的文件夹（本地Repository）
 - 注意事项 ⚠️ 本地Repository需要添加`.gitignore`文件，用于控制上传到Git的数据
@@ -217,7 +216,7 @@ Assets/_Project/VFX/**/*.mkv
         - 快捷键`command` + `shift` + `.`
         - 看到**`.gitignore`**  文件，双击
             
-            ![Screenshot 2025-03-30 at 17.03.55.png](FF%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86%E6%89%8B%E5%86%8C%201c6249c2bd7e80198332ed478bd06ed5/Screenshot_2025-03-30_at_17.03.55.png)
+            ![Screenshot](README/Screenshot_3.png)
             
         - 再次快捷键`command` + `shift` + `.` 恢复原状
     - **在 Win 上检查 `.gitignore`**
@@ -227,19 +226,19 @@ Assets/_Project/VFX/**/*.mkv
 
 **Download**
 
-![Screenshot 2025-03-30 at 16.31.52.png](FF%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86%E6%89%8B%E5%86%8C%201c6249c2bd7e80198332ed478bd06ed5/Screenshot_2025-03-30_at_16.31.52.png)
+![Screenshot](README/Screenshot_4.png)
 
 - 选择Current Branch为main，点击Fetch origin
 
 **Upload**
 
-![Screenshot 2025-03-30 at 16.33.25.png](FF%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86%E6%89%8B%E5%86%8C%201c6249c2bd7e80198332ed478bd06ed5/Screenshot_2025-03-30_at_16.33.25.png)
+![Screenshot](README/Screenshot_5.png)
 
 - 勾选想要同步的Changes项，填写Summary，点击Commit to **main**（也可以改变Current Branch到分支，分支管理细节依据后续项目需求）
 - 每次更新内容后建议Commit到分支先，确认无误后再合并到main
 - 随后点击Push origin（跟Fetch origin在同一位置）
     
-    ![Screenshot 2025-03-30 at 17.21.48.png](FF%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86%E6%89%8B%E5%86%8C%201c6249c2bd7e80198332ed478bd06ed5/Screenshot_2025-03-30_at_17.21.48.png)
+    ![Screenshot](README/Screenshot_6.png)
     
 - ⚠️ **大文件（音频、图像）有更新注意同步到Google Drive**
     - **3D 资源**（FBX, OBJ, BLEND）：请存放到 Google Drive。
@@ -251,11 +250,11 @@ Assets/_Project/VFX/**/*.mkv
 
 以下插件可能需要手动安装，可以在Unity-Window-Package Manager内Double Check
 
-![Screenshot 2025-04-05 at 11.46.20.png](FF%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86%E6%89%8B%E5%86%8C%201c6249c2bd7e80198332ed478bd06ed5/Screenshot_2025-04-05_at_11.46.20.png)
+![Screenshot](README/Screenshot_7.png)
 
 1. Visual Effect Graph - 支持VFX
     
-    ![Screenshot 2025-04-05 at 11.47.18.png](FF%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86%E6%89%8B%E5%86%8C%201c6249c2bd7e80198332ed478bd06ed5/Screenshot_2025-04-05_at_11.47.18.png)
+    ![Screenshot](README/Screenshot_8.png)
     
 
 ---
@@ -264,9 +263,9 @@ Assets/_Project/VFX/**/*.mkv
 
 1. MK Toon Shaders
     
-    ![Screenshot 2025-04-05 at 12.50.35.png](FF%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86%E6%89%8B%E5%86%8C%201c6249c2bd7e80198332ed478bd06ed5/Screenshot_2025-04-05_at_12.50.35.png)
+    ![Screenshot](README/Screenshot_9.png)
     
 
 1. SC Post Effects Pack
 
-![Screenshot 2025-04-05 at 12.54.49.png](FF%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86%E6%89%8B%E5%86%8C%201c6249c2bd7e80198332ed478bd06ed5/f376b0a2-3ce8-4b53-b8bc-428807888927.png)
+![Screenshot](README/Screenshot_10.png)
