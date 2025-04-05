@@ -111,8 +111,14 @@ Assets/_Project/VFX/**/*.mkv
 
 ### 首次下载Repository
 
-![Screenshot](README/screenshot_1.png)
-![Screenshot](README/screenshot_2.png)
+<p align="center">
+  <img src="README/Screenshot_1.png" width="60%" />
+</p>
+
+<p align="center">
+  <img src="README/Screenshot_2.png" width="60%" />
+</p>
+
 
 - 按照上述操作后Local Path下会新建一个用于GitHub同步的文件夹（本地Repository）
 - 注意事项 ⚠️ 本地Repository需要添加`.gitignore`文件，用于控制上传到Git的数据
