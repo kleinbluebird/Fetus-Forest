@@ -241,7 +241,7 @@ Assets/_Project/VFX/**/*.mkv
 **Upload**
 
 <p align="center">
-  <img src="README/Screenshot_5.png" width="60%" />
+  <img src="README/Screenshot_5.png" height="50%" />
 </p>
 
 - 勾选想要同步的Changes项，填写Summary，点击Commit to **main**（也可以改变Current Branch到分支，分支管理细节依据后续项目需求）
@@ -266,7 +266,7 @@ Assets/_Project/VFX/**/*.mkv
 
 1. Visual Effect Graph - 支持VFX
     
-    <p align="center">
+<p align="center">
   <img src="README/Screenshot_8.png" width="60%" />
 </p>
     
@@ -277,13 +277,13 @@ Assets/_Project/VFX/**/*.mkv
 
 1. MK Toon Shaders
     
-    <p align="center">
-  <img src="README/Screenshot_9.png" width="60%" />
+<p align="center">
+  <img src="README/Screenshot_9.png" height="50%" />
 </p>
     
 
 1. SC Post Effects Pack
 
 <p align="center">
-  <img src="README/Screenshot_10.png" width="60%" />
+  <img src="README/Screenshot_10.png" height="50%" />
 </p>
