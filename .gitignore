@@ -40,27 +40,28 @@ MemoryCaptures/
 
 # --- 只提交 _Project 目录的必要文件 ---
 # 忽略 3D 模型源文件（FBX, OBJ, BLEND）和大贴图
-Assets/_Project/Models/**/*.fbx
-Assets/_Project/Models/**/*.obj
-Assets/_Project/Models/**/*.blend
-Assets/_Project/Textures/**/*.tga
-Assets/_Project/Textures/**/*.psd
-Assets/_Project/Textures/**/*.tiff
-Assets/_Project/Textures/**/*.exr
+*.fbx
+*.obj
+*.blend
+*.tga
+*.psd
+*.tiff
+*.exr
+
 
 # 忽略大音频文件（存云盘）
-Assets/_Project/Audio/**/*.wav
-Assets/_Project/Audio/**/*.mp3
-Assets/_Project/Audio/**/*.ogg
+*.wav
+*.mp3
+*.ogg
 
 # Wwise工程文件（压缩后存云盘）
 Assets/_SoundEngine/Wwise/
 
 # 忽略视频文件（存云盘）
-Assets/_Project/VFX/**/*.mp4
-Assets/_Project/VFX/**/*.avi
-Assets/_Project/VFX/**/*.mov
-Assets/_Project/VFX/**/*.mkv
+*.mp4
+*.avi
+*.mov
+*.mkv
 
 # --- Mac 系统相关 ---
 .DS_Store
