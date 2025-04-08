@@ -45,6 +45,7 @@ MemoryCaptures/
 *.blend
 *.tga
 *.psd
+*.hdr
 *.tiff
 *.exr
 
