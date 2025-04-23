@@ -69,7 +69,7 @@ Material:
     - _Transparency: 0.691
     - _Wave_Speed: 0.01
     m_Colors:
-    - _Foam_Color: {r: 1, g: 1, b: 1, a: 0.2}
+    - _Foam_Color: {r: 1, g: 1, b: 1, a: 0.5686275}
     - _Water_Color: {r: 0, g: 0.5150001, b: 1, a: 0.64705884}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
