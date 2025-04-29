@@ -1,25 +1,6 @@
 # FF项目管理手册
 
-Latest Updated: April 5,2025
-
-# 项目评估
-
-## 软件大小预估
-
-| **内容** | **预计大小** |
-| --- | --- |
-| **3D 模型** | 100MB ~ 1GB |
-| **贴图 & 材质** | 200MB ~ 2GB |
-| **音频（20 分钟）** | 50MB ~ 500MB |
-| **视频（可选）** | 500MB ~ 5GB |
-| **Shader & VFX** | 50MB ~ 300MB |
-| **Unity Engine & 依赖** | 500MB ~ 1GB |
-
-**估算总大小**
-
-- **低质量 & 高压缩**（小型 VR 体验）：**500MB ~ 1.5GB**
-- **中等质量（4K 贴图 + 优化视频）**：**2GB ~ 4GB**
-- **高质量（大量预渲染视频）**：**5GB ~ 10GB+**
+Latest Updated: April 29,2025
 
 ## 资源管理策略
 
@@ -129,103 +110,6 @@ Assets/_Project/VFX/**/*.mkv
     - **保留需要共享的核心文件**（如 `Assets/`、`Packages/`、`ProjectSettings/`）。
     - **忽略上传Google Drive管理的资源。**
     
-    可能Clone的时候自动下载有，但建议Double Check一下
-    
-    - **`.gitignore` 内容**
-        
-        ```jsx
-        # --- Unity 相关 ---
-        [Ll]ibrary/
-        [Tt]emp/
-        [Oo]bj/
-        [Bb]uild/
-        [Bb]uilds/
-        [Ll]ogs/
-        [Uu]serSettings/
-        MemoryCaptures/
-        
-        # --- Visual Studio / JetBrains Rider (C# IDE) 相关 ---
-        .vscode/
-        *.csproj
-        *.sln
-        *.suo
-        *.user
-        *.userprefs
-        *.pidb
-        *.booproj
-        *.svd
-        *.pdb
-        *.mdb
-        *.opendb
-        
-        # --- Unity 的自动生成文件 ---
-        *.pidb
-        *.suo
-        *.svd
-        *.psess
-        *.user
-        *.userprefs
-        *.unityproj
-        *.sln
-        *.log
-        *.trace
-        *.aps
-        
-        # --- 不提交 Unity 导出的包 ---
-        *.unitypackage
-        
-        # --- 只提交 _Project 目录的必要文件 ---
-        # 忽略 3D 模型源文件（FBX, OBJ, BLEND）和大贴图
-        *.fbx
-        *.obj
-        *.blend
-        *.tga
-        *.psd
-        *.tiff
-        *.exr
-        
-        # 忽略大音频文件（存云盘）
-        *.wav
-        *.mp3
-        *.ogg
-        
-        # Wwise工程文件（压缩后存云盘）
-        Assets/_SoundEngine/Wwise/
-        
-        # 忽略视频文件（存云盘）
-        *.mp4
-        *.avi
-        *.mov
-        *.mkv
-        
-        # --- Mac 系统相关 ---
-        .DS_Store
-        ._*
-        
-        # --- Windows 系统相关 ---
-        Thumbs.db
-        Desktop.ini
-        $RECYCLE.BIN/
-        
-        # --- 版本管理相关 ---
-        .git/
-        .gitignore
-        *.gitkeep
-        
-        # --- 依赖管理 ---
-        /Packages/com.unity.package-manager/
-        
-        ```
-        
-    - **在 Mac 上检查 `.gitignore`**
-        - 快捷键`command` + `shift` + `.`
-        - 看到**`.gitignore`**  文件，双击
-            
-            ![Screenshot](README/Screenshot_3.png)
-            
-        - 再次快捷键`command` + `shift` + `.` 恢复原状
-    - **在 Win 上检查 `.gitignore`**
-        - 看资源目录下有无**`.gitignore`**  文件，双击用text点开看
 
 ### 后续每次同步
 
@@ -258,9 +142,5 @@ Assets/_Project/VFX/**/*.mkv
 # Unity 插件同步
 
 以下插件可能需要手动安装，可以在Unity-Window-Package Manager内Double Check
-
-<p align="center">
-  <img src="README/Screenshot_7.png" width="60%" />
-</p>
 
 1. Visual Effect Graph - 支持VFX
