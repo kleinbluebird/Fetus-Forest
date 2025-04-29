@@ -105,7 +105,7 @@ MonoBehaviour:
   uiBounds:
     serializedVersion: 2
     x: -344
-    y: -492
+    y: -491
     width: 3030
     height: 3396
 --- !u!114 &114350483966674976
@@ -4561,8 +4561,7 @@ MonoBehaviour:
       m_SerializableType: UnityEditor.VFX.GPUEvent, Unity.VisualEffectGraph.Editor,
         Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Direction: 1
-  m_LinkedSlots:
-  - {fileID: 8926484042661615346}
+  m_LinkedSlots: []
 --- !u!114 &8926484042661615224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5461,8 +5460,7 @@ MonoBehaviour:
       m_SerializableType: UnityEditor.VFX.GPUEvent, Unity.VisualEffectGraph.Editor,
         Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Direction: 0
-  m_LinkedSlots:
-  - {fileID: 8926484042661615223}
+  m_LinkedSlots: []
 --- !u!114 &8926484042661615347
 MonoBehaviour:
   m_ObjectHideFlags: 0
