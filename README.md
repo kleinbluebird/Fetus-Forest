@@ -123,15 +123,10 @@ Assets/_Project/VFX/**/*.mkv
 
 **Upload**
 
-<p align="center">
-  <img src="README/Screenshot_5.png" width="30%" />
-</p>
-
 - 勾选想要同步的Changes项，填写Summary，点击Commit to **main**（也可以改变Current Branch到分支，分支管理细节依据后续项目需求）
 - 每次更新内容后建议Commit到分支先，确认无误后再合并到main
 - 随后点击Push origin（跟Fetch origin在同一位置）
-    
-    ![Screenshot](README/Screenshot_6.png)
+
     
 - ⚠️ **大文件（音频、图像）有更新注意同步到Google Drive**
     - **3D 资源**（FBX, OBJ, BLEND）：请存放到 Google Drive。
