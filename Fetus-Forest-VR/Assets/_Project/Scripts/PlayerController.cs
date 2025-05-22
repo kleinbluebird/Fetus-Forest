@@ -1,9 +1,12 @@
 using UnityEngine;
+#if UNITY_EDITOR
+using AK.Wwise.Editor;
+#endif
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
 {
-	[Header("Movement Control")]
+    [Header("Movement Control")]
     public float moveSpeed = 5f;
     public float verticalSpeed = 3f;
     public float drag = 2f;
@@ -21,9 +24,23 @@ public class PlayerController : MonoBehaviour
     public LayerMask clickLayerMask;
     public float autoMoveSpeed = 3f;
 
+    [Header("Audio Events")]
+    [Tooltip("Wwise event name for starting swimming up movement")]
+    public string swimUpStartEvent = "Player_SwimUp_Start";
+    [Tooltip("Wwise event name for stopping swimming up movement")]
+    public string swimUpStopEvent = "Player_SwimUp_Stop";
+    [Tooltip("Wwise event name for starting swimming down movement")]
+    public string swimDownStartEvent = "Player_SwimDown_Start";
+    [Tooltip("Wwise event name for stopping swimming down movement")]
+    public string swimDownStopEvent = "Player_SwimDown_Stop";
+
     private Rigidbody rb;
     private Vector2 lookInput;
     private Vector3? targetPosition;
+
+    // Audio state tracking
+    private bool isSwimmingUp = false;
+    private bool isSwimmingDown = false;
 
     void Start()
     {
@@ -41,6 +58,7 @@ public class PlayerController : MonoBehaviour
     {
         HandleLook();
         HandleMouseClickMovement();
+        HandleVerticalMovementAudio();
     }
 
     void FixedUpdate()
@@ -62,17 +80,17 @@ public class PlayerController : MonoBehaviour
     void HandleMovement()
     {
         Vector3 inputDirection = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
-		//Debug.Log("Input Direction: " + inputDirection); 
+        //Debug.Log("Input Direction: " + inputDirection); 
         inputDirection = transform.TransformDirection(inputDirection);
 
-        // 上浮/下潜
+        // Handle vertical movement (up/down swimming)
         if (Input.GetKey(KeyCode.E)) inputDirection.y += 1f;
         if (Input.GetKey(KeyCode.Q)) inputDirection.y -= 1f;
 
         inputDirection.Normalize();
         rb.AddForce(inputDirection * moveSpeed);
 
-        // 如果点击移动目标存在，则推动玩家朝目标前进
+        // If click movement target exists, push player towards target
         if (targetPosition.HasValue)
         {
             Vector3 directionToTarget = (targetPosition.Value - transform.position).normalized;
@@ -81,8 +99,42 @@ public class PlayerController : MonoBehaviour
             float distance = Vector3.Distance(transform.position, targetPosition.Value);
             if (distance < 1f)
             {
-                targetPosition = null; // 到达目标点
+                targetPosition = null; // Reached target point
             }
+        }
+    }
+
+    void HandleVerticalMovementAudio()
+    {
+        bool currentlySwimmingUp = Input.GetKey(KeyCode.E);
+        bool currentlySwimmingDown = Input.GetKey(KeyCode.Q);
+
+        // Handle swimming up audio
+        if (currentlySwimmingUp && !isSwimmingUp)
+        {
+            // Started swimming up - play start event
+            PlayWwiseEvent(swimUpStartEvent);
+            isSwimmingUp = true;
+        }
+        else if (!currentlySwimmingUp && isSwimmingUp)
+        {
+            // Stopped swimming up - play stop event
+            PlayWwiseEvent(swimUpStopEvent);
+            isSwimmingUp = false;
+        }
+
+        // Handle swimming down audio
+        if (currentlySwimmingDown && !isSwimmingDown)
+        {
+            // Started swimming down - play start event
+            PlayWwiseEvent(swimDownStartEvent);
+            isSwimmingDown = true;
+        }
+        else if (!currentlySwimmingDown && isSwimmingDown)
+        {
+            // Stopped swimming down - play stop event
+            PlayWwiseEvent(swimDownStopEvent);
+            isSwimmingDown = false;
         }
     }
 
@@ -90,7 +142,7 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 pos = transform.position;
 
-        // 限制不能上浮到水面上
+        // Limit player from floating above water surface
         if (pos.y > waterSurfaceY)
         {
             pos.y = waterSurfaceY;
@@ -98,7 +150,7 @@ public class PlayerController : MonoBehaviour
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
         }
 
-        // 限制在球形边界范围内
+        // Limit within spherical boundary
         Vector3 offset = pos - boundaryCenter;
         if (offset.magnitude > boundaryRadius)
         {
@@ -112,7 +164,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-			//Debug.Log("Mouse Clicked");
+            //Debug.Log("Mouse Clicked");
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out RaycastHit hit, 100f, clickLayerMask))
             {
@@ -120,5 +172,13 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-	
+
+    void PlayWwiseEvent(string eventName)
+    {
+        // Play Wwise event using official Wwise Unity API
+        if (!string.IsNullOrEmpty(eventName))
+        {
+            AkSoundEngine.PostEvent(eventName, gameObject);
+        }
+    }
 }
