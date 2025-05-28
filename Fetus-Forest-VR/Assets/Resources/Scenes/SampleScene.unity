@@ -295,8 +295,8 @@ MonoBehaviour:
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: 0565273531e094f21a3b17a215ad2ee2, type: 2}
   useCallbacks: 0
+  stopSoundOnDestroy: 1
   Callbacks: []
-  playingId: 0
   soundEmitterObject: {fileID: 0}
   transitionDuration: 0
   eventIdInternal: 0
@@ -319,9 +319,11 @@ MonoBehaviour:
     useDefaultListeners: 1
   isEnvironmentAware: 1
   isStaticObject: 0
+  usePositionOffsetData: 0
   m_positionOffsetData:
     KeepMe: 0
     positionOffset: {x: 0, y: 0, z: 0}
+  scalingFactor: 1
   m_posOffsetData: {fileID: 0}
   listenerMask: 1
 --- !u!1 &203200936
@@ -701,6 +703,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDefaultListener: 1
+  bOverrideScalingFactor: 0
+  scalingFactor: -1
   listenerId: 0
 --- !u!114 &330585549
 MonoBehaviour:
@@ -719,9 +723,11 @@ MonoBehaviour:
     useDefaultListeners: 1
   isEnvironmentAware: 0
   isStaticObject: 0
+  usePositionOffsetData: 0
   m_positionOffsetData:
     KeepMe: 0
     positionOffset: {x: 0, y: 0, z: 0}
+  scalingFactor: 1
   m_posOffsetData: {fileID: 0}
   listenerMask: 1
 --- !u!1 &357933959
@@ -1558,8 +1564,8 @@ MonoBehaviour:
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: 0565273531e094f21a3b17a215ad2ee2, type: 2}
   useCallbacks: 0
+  stopSoundOnDestroy: 1
   Callbacks: []
-  playingId: 0
   soundEmitterObject: {fileID: 0}
   transitionDuration: 0
   eventIdInternal: 0
@@ -1582,9 +1588,11 @@ MonoBehaviour:
     useDefaultListeners: 1
   isEnvironmentAware: 1
   isStaticObject: 0
+  usePositionOffsetData: 0
   m_positionOffsetData:
     KeepMe: 0
     positionOffset: {x: 0, y: 0, z: 0}
+  scalingFactor: 1
   m_posOffsetData: {fileID: 0}
   listenerMask: 1
 --- !u!1001 &798683722
@@ -2223,8 +2231,8 @@ MonoBehaviour:
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: 0565273531e094f21a3b17a215ad2ee2, type: 2}
   useCallbacks: 0
+  stopSoundOnDestroy: 1
   Callbacks: []
-  playingId: 0
   soundEmitterObject: {fileID: 0}
   transitionDuration: 0
   eventIdInternal: 0
@@ -2247,9 +2255,11 @@ MonoBehaviour:
     useDefaultListeners: 1
   isEnvironmentAware: 1
   isStaticObject: 0
+  usePositionOffsetData: 0
   m_positionOffsetData:
     KeepMe: 0
     positionOffset: {x: 0, y: 0, z: 0}
+  scalingFactor: 1
   m_posOffsetData: {fileID: 0}
   listenerMask: 1
 --- !u!1 &969719639
@@ -3412,8 +3422,8 @@ MonoBehaviour:
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: 7d119d6223a464850af0a261faa4461d, type: 2}
   useCallbacks: 0
+  stopSoundOnDestroy: 1
   Callbacks: []
-  playingId: 0
   soundEmitterObject: {fileID: 0}
   transitionDuration: 0
   eventIdInternal: 0
@@ -3436,9 +3446,11 @@ MonoBehaviour:
     useDefaultListeners: 1
   isEnvironmentAware: 1
   isStaticObject: 0
+  usePositionOffsetData: 0
   m_positionOffsetData:
     KeepMe: 0
     positionOffset: {x: 0, y: 0, z: 0}
+  scalingFactor: 1
   m_posOffsetData: {fileID: 0}
   listenerMask: 1
 --- !u!1 &1488557380
@@ -4372,8 +4384,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1852808633}
-  - component: {fileID: 1852808632}
-  - component: {fileID: 1852808631}
+  - component: {fileID: 1852808635}
+  - component: {fileID: 1852808634}
   m_Layer: 0
   m_Name: AmbientSound
   m_TagString: Untagged
@@ -4381,7 +4393,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1852808631
+--- !u!4 &1852808633
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1852808630}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 37.933033, y: -76.552536, z: 90.87728}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1852808634
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4403,14 +4430,14 @@ MonoBehaviour:
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: 10a2b30a8c3a046e09f307990d5c5857, type: 2}
   useCallbacks: 0
+  stopSoundOnDestroy: 1
   Callbacks: []
-  playingId: 0
   soundEmitterObject: {fileID: 0}
   transitionDuration: 0
   eventIdInternal: 0
   valueGuidInternal: 
   m_callbackDataInternal: {fileID: 0}
---- !u!114 &1852808632
+--- !u!114 &1852808635
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4427,26 +4454,13 @@ MonoBehaviour:
     useDefaultListeners: 1
   isEnvironmentAware: 1
   isStaticObject: 0
+  usePositionOffsetData: 0
   m_positionOffsetData:
     KeepMe: 0
     positionOffset: {x: 0, y: 0, z: 0}
+  scalingFactor: 1
   m_posOffsetData: {fileID: 0}
   listenerMask: 1
---- !u!4 &1852808633
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1852808630}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 37.933033, y: -76.552536, z: 90.87728}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1897895604
 GameObject:
   m_ObjectHideFlags: 0
