@@ -124,7 +124,7 @@ MonoBehaviour:
     m_Value: 0
   fogColor:
     m_OverrideState: 1
-    m_Value: {r: 0.091091126, g: 0.10895048, b: 0.21698111, a: 1}
+    m_Value: {r: 0.30041832, g: 0.31795865, b: 0.4056604, a: 1}
   fogColorGradient:
     m_OverrideState: 0
     m_Value: {fileID: 0}
@@ -136,11 +136,11 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 1
   distanceFog:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 1
   distanceDensity:
-    m_OverrideState: 0
-    m_Value: 1
+    m_OverrideState: 1
+    m_Value: 5.61
   useRadialDistance:
     m_OverrideState: 0
     m_Value: 1
@@ -305,10 +305,10 @@ MonoBehaviour:
     m_Value: 0
   endFadeDistance:
     m_OverrideState: 1
-    m_Value: 2000
+    m_Value: 200
   amount:
     m_OverrideState: 1
-    m_Value: 1.8
+    m_Value: 0.42
   iterations:
     m_OverrideState: 0
     m_Value: 6
@@ -331,10 +331,10 @@ MonoBehaviour:
   active: 1
   postExposure:
     m_OverrideState: 1
-    m_Value: 0.96
+    m_Value: 1.1
   contrast:
     m_OverrideState: 1
-    m_Value: 48
+    m_Value: 70
   colorFilter:
     m_OverrideState: 0
     m_Value: {r: 0.6415094, g: 0.6415094, b: 0.6415094, a: 1}
