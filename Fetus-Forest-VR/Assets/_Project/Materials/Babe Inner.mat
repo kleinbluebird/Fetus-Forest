@@ -21,13 +21,27 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Babe Inner
-  m_Shader: {fileID: 4800000, guid: 5b7d18bf8a091cc48a3a9075eca72ff9, type: 3}
+  m_Shader: {fileID: 4800000, guid: f5cbdd554c80cf840960f02543c9e6a8, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _RECEIVE_SHADOWS_OFF
   - _SHADING_COLOR
-  m_InvalidKeywords: []
+  m_InvalidKeywords:
+  - _ANCHORSSTOOBJECTSORIGIN_ON
+  - _CASTSHADOWSANCHORSSTOOBJECTSORIGIN_ON
+  - _CASTSHADOWSSSCAMERADISTANCESCALED_ON
+  - _ENABLEANTIALIASING_ON
+  - _ENABLERIMSTYLING_ON
+  - _ENABLESTYLING_ON
+  - _RIMAFFECTEDBYNORMALMAP_ON
+  - _RIMANCHORSSTOOBJECTSORIGIN_ON
+  - _RIMSSCAMERADISTANCESCALED_ON
+  - _SPECULARAFFECTEDBYNORMALMAP_ON
+  - _SPECULARANCHORSSTOOBJECTSORIGIN_ON
+  - _SPECULARSSCAMERADISTANCESCALED_ON
+  - _SPECULARUSELIGHTCOLORS_ON
+  - _SSCAMERADISTANCESCALED_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -156,7 +170,7 @@ Material:
     - _EnableCastShadows: 0
     - _EnableCastShadowsRandomizer: 0
     - _EnableCastShadowsStyling: 0
-    - _EnableOutline: 1
+    - _EnableOutline: 0
     - _EnableRim: 0
     - _EnableRimRandomizer: 0
     - _EnableRimStyling: 1
@@ -354,14 +368,14 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.4433962, g: 0.4433962, b: 0.4433962, a: 0.21176471}
+    - _BaseColor: {r: 0.33962262, g: 0.33962262, b: 0.33962262, a: 0.21176471}
     - _CastShadowColor: {r: 0, g: 0, b: 0, a: 1}
     - _CastShadowsPolarCenter: {r: 0, g: 0, b: 0, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _CoreShadowColor: {r: 0, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 0.9811321, g: 0.9811321, b: 0.9811321, a: 1}
     - _FormShadowColor: {r: 0, g: 0, b: 0, a: 1}
-    - _OutlineColor: {r: 0.1981132, g: 0.1981132, b: 0.1981132, a: 1}
+    - _OutlineColor: {r: 0.1792453, g: 0.1792453, b: 0.1792453, a: 1}
     - _PolarCenter: {r: 0, g: 0, b: 0, a: 1}
     - _RimColor: {r: 1, g: 0, b: 0, a: 1}
     - _RimPolarCenter: {r: 0, g: 0, b: 0, a: 1}
@@ -370,7 +384,7 @@ Material:
     - _SpecularPolarCenter: {r: 0, g: 0, b: 0, a: 1}
     - _StylingCastShadowsColor: {r: 0, g: 0, b: 0, a: 1}
     - _StylingColor: {r: 0.23584908, g: 0.23584908, b: 0.23584908, a: 1}
-    - _StylingRimColor: {r: 0.2830189, g: 0.2830189, b: 0.2830189, a: 1}
+    - _StylingRimColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
     - _StylingSpecularColor: {r: 1, g: 1, b: 0, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
