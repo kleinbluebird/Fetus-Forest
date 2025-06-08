@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
@@ -47,6 +48,7 @@ public class PlayerController : MonoBehaviour
     {
         HandleMovement();
         ClampPositionWithinBounds();
+        CheckNearbyDroplets();
     }
 
     void HandleLook()
@@ -120,5 +122,37 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-	
+    
+    void CheckNearbyDroplets()
+    {
+        if (WaterDropletGridManager.Instance == null) return;
+        
+        float triggerHeight = waterSurfaceY - 0.5f; // 玩家必须达到的上浮高度才开始检测交互
+        float checkRadius = 5.0f;
+        
+        Vector3 playerPos = transform.position;
+        
+        List<DropletInteractionController> allDroplets = WaterDropletGridManager.Instance.GetAllDroplets();
+        
+        if (playerPos.y >= triggerHeight)
+        {
+            // 玩家已达到指定高度，检测邻近水滴
+            List<DropletInteractionController> nearby = WaterDropletGridManager.Instance.GetNearbyDroplets(playerPos, checkRadius);
+
+            foreach (DropletInteractionController droplet in allDroplets)
+            {
+                bool isNear = nearby.Contains(droplet);
+                droplet.SetPlayerNear(isNear);
+            }
+        }
+        else
+        {
+            // 玩家未达到触发高度，保持所有水滴未触发状态（但不强制复位）
+            foreach (DropletInteractionController droplet in allDroplets)
+            {
+                droplet.SetPlayerNear(false);
+            }
+        }
+    }
+
 }
