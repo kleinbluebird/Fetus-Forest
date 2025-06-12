@@ -44,7 +44,6 @@ Material:
   - _SPECULARSSCAMERADISTANCESCALED_ON
   - _SPECULARUSELIGHTCOLORS_ON
   - _SSCAMERADISTANCESCALED_ON
-  - _SUMLIGHTSBEFOREPOSTERIZATION_ON
   - _SYNCWITHRIM_ON
   - _SYNCWITHSPECULAR_ON
   m_LightmapFlags: 4
@@ -358,7 +357,7 @@ Material:
     - _StylingSpecularThicknessControl: 0
     - _StylingSpecularThicknessFalloff: 0.1
     - _StylingSpecularUseLightColors: 0
-    - _SumLightsBeforePosterization: 1
+    - _SumLightsBeforePosterization: 0
     - _Surface: 0
     - _SyncWithLightPartitioning: 0
     - _SyncWithRim: 1

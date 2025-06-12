@@ -145,7 +145,7 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 1
   horizonMinMax:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: {x: 0, y: 1}
   skyboxInfluence:
     m_OverrideState: 0
@@ -172,8 +172,8 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 1
   lightExponent:
-    m_OverrideState: 0
-    m_Value: 8
+    m_OverrideState: 1
+    m_Value: 31.2
   heightFog:
     m_OverrideState: 0
     m_Value: 0

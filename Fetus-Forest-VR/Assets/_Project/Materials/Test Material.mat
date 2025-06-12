@@ -1,5 +1,18 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-5149714107847409024
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 9
 --- !u!21 &2100000
 Material:
   serializedVersion: 8
@@ -7,21 +20,20 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Plant
+  m_Name: Test Material
   m_Shader: {fileID: 4800000, guid: f5cbdd554c80cf840960f02543c9e6a8, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
-  - _RECEIVE_SHADOWS_OFF
+  - _EMISSION
   - _SHADING_COLOR
   m_InvalidKeywords: []
-  m_LightmapFlags: 4
+  m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
+  m_DoubleSidedGI: 1
   m_CustomRenderQueue: -1
   stringTagMap: {}
-  disabledShaderPasses:
-  - MOTIONVECTORS
+  disabledShaderPasses: []
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
@@ -115,7 +127,7 @@ Material:
     - _CastShadowsNoise1Size: 1
     - _CastShadowsNoise2Seed: 1
     - _CastShadowsNoiseIntensity: 0
-    - _CastShadowsNumberOfCellsHatching: 1
+    - _CastShadowsNumberOfCellsHatching: 2
     - _CastShadowsOpacityRandomIntensity: 0
     - _CastShadowsOpacityRandomMode: 0
     - _CastShadowsPolarCenterMode: 0
@@ -127,11 +139,11 @@ Material:
     - _CastShadowsStyle: 0
     - _CastShadowsThicknessRandomMode: 0
     - _CastShadowsThicknesshRandomIntensity: 0
-    - _CellTransitionSmoothness: 0.519
+    - _CellTransitionSmoothness: 0.2
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
     - _CoordinateSystem: 0
-    - _Cull: 2
+    - _Cull: 1
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
@@ -139,7 +151,7 @@ Material:
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnableAntiAliasing: 1
-    - _EnableCastShadows: 0
+    - _EnableCastShadows: 1
     - _EnableCastShadowsRandomizer: 0
     - _EnableCastShadowsStyling: 1
     - _EnableOutline: 0
@@ -152,7 +164,7 @@ Material:
     - _EnableSpecular: 0
     - _EnableSpecularRandomizer: 0
     - _EnableSpecularStyling: 0
-    - _EnableStyling: 0
+    - _EnableStyling: 1
     - _EnableStylingDistanceFade: 0
     - _EnableToonShading: 0
     - _EnvironmentReflections: 1
@@ -180,12 +192,12 @@ Material:
     - _OpacityRandomMode: 0
     - _OutlineCameraDistanceImpact: 0
     - _OutlineDepthOffset: 0
-    - _OutlineWidth: 2
+    - _OutlineWidth: 6
     - _Parallax: 0.005
     - _PolarCenterMode: 0
     - _QueueControl: -1
     - _QueueOffset: 0
-    - _ReceiveShadows: 0
+    - _ReceiveShadows: 1
     - _RimAffectedArea: 1
     - _RimAffectedByNormalMap: 1
     - _RimAnchorSSToObjectsOrigin: 1
@@ -261,7 +273,7 @@ Material:
     - _StylingCastShadowsHalftonesOffset: 1
     - _StylingCastShadowsHalftonesRoundness: 1
     - _StylingCastShadowsHalftonesRoundnessFalloff: 1
-    - _StylingCastShadowsHardness: 0.9
+    - _StylingCastShadowsHardness: 1
     - _StylingCastShadowsInitialDirection: 45
     - _StylingCastShadowsIsInverted: 0
     - _StylingCastShadowsOpacity: 1
@@ -269,9 +281,9 @@ Material:
     - _StylingCastShadowsRotationBetweenCells: 30
     - _StylingCastShadowsSmoothness: 1
     - _StylingCastShadowsSyncWithOtherStyling: 1
-    - _StylingCastShadowsThickness: 0.8
+    - _StylingCastShadowsThickness: 0.14
     - _StylingCastShadowsThicknessControl: 0
-    - _StylingCastShadowsThicknessFalloff: 0.1
+    - _StylingCastShadowsThicknessFalloff: 0.5
     - _StylingDFFalloff: 0
     - _StylingDFStartingDistance: 0
     - _StylingDistanceFadeValue: 0
@@ -298,14 +310,14 @@ Material:
     - _StylingShadingHalftonesOffset: 1
     - _StylingShadingHalftonesRoundness: 1
     - _StylingShadingHalftonesRoundnessFalloff: 1
-    - _StylingShadingHardness: 0.9
+    - _StylingShadingHardness: 1
     - _StylingShadingInitialDirection: 45
     - _StylingShadingIsInverted: 0
     - _StylingShadingOpacity: 1
     - _StylingShadingOpacityFalloff: 0
     - _StylingShadingRotationBetweenCells: 30
     - _StylingShadingSyncWithOtherStyling: 0
-    - _StylingShadingThickness: 0.9
+    - _StylingShadingThickness: 0.14
     - _StylingShadingThicknessControl: 0
     - _StylingShadingThicknessFalloff: 0.5
     - _StylingSpecularBlending: 0
@@ -340,14 +352,14 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.24528301, g: 0.24528301, b: 0.24528301, a: 1}
+    - _BaseColor: {r: 0.7075472, g: 0, b: 0, a: 1}
     - _CastShadowColor: {r: 0, g: 0, b: 0, a: 1}
     - _CastShadowsPolarCenter: {r: 0, g: 0, b: 0, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _CoreShadowColor: {r: 0.7924528, g: 0.7924528, b: 0.7924528, a: 1}
-    - _EmissionColor: {r: 0.8207547, g: 0.8207547, b: 0.8207547, a: 1}
-    - _FormShadowColor: {r: 0.6886792, g: 0.6886792, b: 0.6886792, a: 1}
-    - _OutlineColor: {r: 0.26415092, g: 0.26415092, b: 0.26415092, a: 1}
+    - _CoreShadowColor: {r: 0, g: 0, b: 0, a: 1}
+    - _EmissionColor: {r: 13.132075, g: 0, b: 0, a: 1}
+    - _FormShadowColor: {r: 0, g: 0, b: 0, a: 1}
+    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _PolarCenter: {r: 0, g: 0, b: 0, a: 1}
     - _RimColor: {r: 1, g: 0, b: 0, a: 1}
     - _RimPolarCenter: {r: 0, g: 0, b: 0, a: 1}
@@ -355,21 +367,8 @@ Material:
     - _SpecularColor: {r: 1, g: 1, b: 0, a: 1}
     - _SpecularPolarCenter: {r: 0, g: 0, b: 0, a: 1}
     - _StylingCastShadowsColor: {r: 0, g: 0, b: 0, a: 1}
-    - _StylingColor: {r: 0, g: 0, b: 0, a: 1}
+    - _StylingColor: {r: 0.8301887, g: 0, b: 0, a: 1}
     - _StylingRimColor: {r: 0, g: 0, b: 1, a: 1}
     - _StylingSpecularColor: {r: 1, g: 1, b: 0, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
---- !u!114 &5723664585743382636
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 9
