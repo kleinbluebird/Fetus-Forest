@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-5237714839500683908
+--- !u!114 &-5572571777867848901
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Landscape
+  m_Name: Neuron Inner_Small
   m_Shader: {fileID: 4800000, guid: f5cbdd554c80cf840960f02543c9e6a8, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -166,7 +166,7 @@ Material:
     - _EnableSpecularStyling: 0
     - _EnableStyling: 0
     - _EnableStylingDistanceFade: 0
-    - _EnableToonShading: 1
+    - _EnableToonShading: 0
     - _EnvironmentReflections: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
@@ -338,7 +338,7 @@ Material:
     - _StylingSpecularThicknessControl: 0
     - _StylingSpecularThicknessFalloff: 0.1
     - _StylingSpecularUseLightColors: 0
-    - _SumLightsBeforePosterization: 0
+    - _SumLightsBeforePosterization: 1
     - _Surface: 0
     - _SyncWithLightPartitioning: 0
     - _SyncWithRim: 1
@@ -352,12 +352,12 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.31132078, g: 0.31132078, b: 0.31132078, a: 1}
+    - _BaseColor: {r: 0.3301887, g: 0.3301887, b: 0.3301887, a: 1}
     - _CastShadowColor: {r: 0, g: 0, b: 0, a: 1}
     - _CastShadowsPolarCenter: {r: 0, g: 0, b: 0, a: 1}
-    - _Color: {r: 0.31132075, g: 0.31132075, b: 0.31132075, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _CoreShadowColor: {r: 0, g: 0, b: 0, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _EmissionColor: {r: 5.9921575, g: 5.9921575, b: 5.9921575, a: 1}
     - _FormShadowColor: {r: 0, g: 0, b: 0, a: 1}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _PolarCenter: {r: 0, g: 0, b: 0, a: 1}

@@ -26,6 +26,7 @@ public class FreeCameraController : MonoBehaviour
     {
         HandleMovement();
         HandleRotation();
+        AvoidCameraClipping(); 
 
         // ESC 解锁鼠标
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -68,4 +69,18 @@ public class FreeCameraController : MonoBehaviour
         transform.localRotation = Quaternion.Euler(0, yaw, 0);
         cameraTransform.localRotation = Quaternion.Euler(pitch, 0, 0);
     }
+    
+    void AvoidCameraClipping()
+    {
+        Vector3 camPos = cameraTransform.position;
+        Vector3 camForward = cameraTransform.forward;
+
+        float checkDistance = 0.3f; // 你可以调整这个数值，避免太贴近物体
+        if (Physics.Raycast(camPos, camForward, out RaycastHit hit, checkDistance))
+        {
+            // 若前方有遮挡物，回推摄像机一点距离
+            cameraTransform.position = hit.point - camForward * 0.1f;
+        }
+    }
+
 }

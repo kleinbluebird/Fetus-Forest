@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Landscape
+  m_Name: Neuron Outer
   m_Shader: {fileID: 4800000, guid: f5cbdd554c80cf840960f02543c9e6a8, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -29,7 +29,7 @@ Material:
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
+  m_DoubleSidedGI: 1
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses:
@@ -139,11 +139,11 @@ Material:
     - _CastShadowsStyle: 0
     - _CastShadowsThicknessRandomMode: 0
     - _CastShadowsThicknesshRandomIntensity: 0
-    - _CellTransitionSmoothness: 0.2
+    - _CellTransitionSmoothness: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
     - _CoordinateSystem: 0
-    - _Cull: 2
+    - _Cull: 1
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
@@ -155,7 +155,7 @@ Material:
     - _EnableCastShadowsRandomizer: 0
     - _EnableCastShadowsStyling: 1
     - _EnableOutline: 0
-    - _EnableRim: 0
+    - _EnableRim: 1
     - _EnableRimRandomizer: 0
     - _EnableRimStyling: 0
     - _EnableShadingRandomizer: 0
@@ -198,7 +198,7 @@ Material:
     - _QueueControl: -1
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _RimAffectedArea: 1
+    - _RimAffectedArea: 2
     - _RimAffectedByNormalMap: 1
     - _RimAnchorSSToObjectsOrigin: 1
     - _RimBlending: 0
@@ -212,7 +212,7 @@ Material:
     - _RimNoise1Size: 1
     - _RimNoise2Seed: 1
     - _RimNoiseIntensity: 0
-    - _RimOpacity: 1
+    - _RimOpacity: 0.506
     - _RimOpacityRandomIntensity: 0
     - _RimOpacityRandomMode: 0
     - _RimPolarCenterMode: 0
@@ -232,7 +232,7 @@ Material:
     - _ShadingNoise1Size: 1
     - _ShadingNoise2Seed: 1
     - _ShadingStyle: 0
-    - _ShadingUseLightColors: 0
+    - _ShadingUseLightColors: 1
     - _Smoothness: 0.5
     - _SmoothnessSource: 0
     - _SmoothnessTextureChannel: 0
@@ -352,16 +352,16 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.31132078, g: 0.31132078, b: 0.31132078, a: 1}
+    - _BaseColor: {r: 0.9245283, g: 0.9245283, b: 0.9245283, a: 1}
     - _CastShadowColor: {r: 0, g: 0, b: 0, a: 1}
     - _CastShadowsPolarCenter: {r: 0, g: 0, b: 0, a: 1}
     - _Color: {r: 0.31132075, g: 0.31132075, b: 0.31132075, a: 1}
-    - _CoreShadowColor: {r: 0, g: 0, b: 0, a: 1}
+    - _CoreShadowColor: {r: 0.3018868, g: 0.3018868, b: 0.3018868, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _FormShadowColor: {r: 0, g: 0, b: 0, a: 1}
+    - _FormShadowColor: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 1}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _PolarCenter: {r: 0, g: 0, b: 0, a: 1}
-    - _RimColor: {r: 1, g: 0, b: 0, a: 1}
+    - _RimColor: {r: 0.46226418, g: 0.46226418, b: 0.46226418, a: 1}
     - _RimPolarCenter: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 0, a: 1}
