@@ -1,4 +1,8 @@
 using UnityEngine;
+<<<<<<< Updated upstream:Fetus-Forest-VR/Assets/_Project/Scripts/PlayerController.cs
+=======
+using System.Collections.Generic;
+>>>>>>> Stashed changes:Fetus-Forest-VR/Assets/_Project/Scripts/Control/PlayerController.cs
 #if UNITY_EDITOR
 using AK.Wwise.Editor;
 #endif
@@ -172,6 +176,43 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+<<<<<<< Updated upstream:Fetus-Forest-VR/Assets/_Project/Scripts/PlayerController.cs
+=======
+
+    void CheckNearbyDroplets()
+    {
+        if (WaterDropletGridManager.Instance == null) return;
+
+        float triggerHeight = waterSurfaceY - 0.5f; // Player must reach this height to start detecting interactions
+        float checkRadius = 5.0f;
+
+        Vector3 playerPos = transform.position;
+
+        List<DropletInteractionController> allDroplets = WaterDropletGridManager.Instance.GetAllDroplets();
+
+        if (playerPos.y >= triggerHeight)
+        {
+            // Player has reached specified height, detect nearby water droplets
+            List<DropletInteractionController> nearby = WaterDropletGridManager.Instance.GetNearbyDroplets(playerPos, checkRadius);
+>>>>>>> Stashed changes:Fetus-Forest-VR/Assets/_Project/Scripts/Control/PlayerController.cs
+
+    void PlayWwiseEvent(string eventName)
+    {
+        // Play Wwise event using official Wwise Unity API
+        if (!string.IsNullOrEmpty(eventName))
+        {
+<<<<<<< Updated upstream:Fetus-Forest-VR/Assets/_Project/Scripts/PlayerController.cs
+            AkSoundEngine.PostEvent(eventName, gameObject);
+        }
+    }
+=======
+            // Player hasn't reached trigger height, keep all droplets in non-triggered state (but don't force reset)
+            foreach (DropletInteractionController droplet in allDroplets)
+            {
+                droplet.SetPlayerNear(false);
+            }
+        }
+    }
 
     void PlayWwiseEvent(string eventName)
     {
@@ -181,4 +222,5 @@ public class PlayerController : MonoBehaviour
             AkSoundEngine.PostEvent(eventName, gameObject);
         }
     }
+>>>>>>> Stashed changes:Fetus-Forest-VR/Assets/_Project/Scripts/Control/PlayerController.cs
 }
