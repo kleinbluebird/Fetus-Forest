@@ -1,16 +1,9 @@
 {
   "dependencies": {
-<<<<<<< Updated upstream
-    "com.unity.2d.sprite": {
-      "version": "1.0.0",
-      "depth": 0,
-      "source": "builtin",
-=======
     "com.shadercrew.the-toon-shader.core": {
       "version": "file:com.shadercrew.the-toon-shader.core",
       "depth": 0,
       "source": "embedded",
->>>>>>> Stashed changes
       "dependencies": {}
     },
     "com.unity.ai.navigation": {

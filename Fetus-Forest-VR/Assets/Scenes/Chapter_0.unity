@@ -1957,6 +1957,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2866883587052183346}
     m_Modifications:
+    - target: {fileID: -4591244472226359917, guid: fee5f6d1ad0cd4298bc1e415dbc5e635, type: 3}
+      propertyPath: wwiseEventStart
+      value: Rope
+      objectReference: {fileID: 0}
+    - target: {fileID: -4591244472226359917, guid: fee5f6d1ad0cd4298bc1e415dbc5e635, type: 3}
+      propertyPath: wwiseEventReturn
+      value: Rope
+      objectReference: {fileID: 0}
+    - target: {fileID: -4591244472226359917, guid: fee5f6d1ad0cd4298bc1e415dbc5e635, type: 3}
+      propertyPath: wwiseEventMaintain
+      value: Point
+      objectReference: {fileID: 0}
     - target: {fileID: 2682969567485887222, guid: fee5f6d1ad0cd4298bc1e415dbc5e635, type: 3}
       propertyPath: m_Name
       value: "\u6C34\u6EF4\u80CE\u513F-\u9636\u6BB51 (3)"
@@ -2723,6 +2735,18 @@ PrefabInstance:
     - target: {fileID: 112427462912078941, guid: c1db5091f7988451f86e6e5bfb18c031, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 654175519135814285, guid: c1db5091f7988451f86e6e5bfb18c031, type: 3}
+      propertyPath: wwiseEventStart
+      value: Rope
+      objectReference: {fileID: 0}
+    - target: {fileID: 654175519135814285, guid: c1db5091f7988451f86e6e5bfb18c031, type: 3}
+      propertyPath: wwiseEventReturn
+      value: Rope
+      objectReference: {fileID: 0}
+    - target: {fileID: 654175519135814285, guid: c1db5091f7988451f86e6e5bfb18c031, type: 3}
+      propertyPath: wwiseEventMaintain
+      value: Point
       objectReference: {fileID: 0}
     - target: {fileID: 775952302739500775, guid: c1db5091f7988451f86e6e5bfb18c031, type: 3}
       propertyPath: m_Name
@@ -3883,6 +3907,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3701474509175352272, guid: 2e62ae5991dd84dc7bfd68a31759ee24, type: 3}
+      propertyPath: wwiseEventStart
+      value: Rope
+      objectReference: {fileID: 0}
+    - target: {fileID: 3701474509175352272, guid: 2e62ae5991dd84dc7bfd68a31759ee24, type: 3}
+      propertyPath: wwiseEventReturn
+      value: Rope
+      objectReference: {fileID: 0}
+    - target: {fileID: 3701474509175352272, guid: 2e62ae5991dd84dc7bfd68a31759ee24, type: 3}
+      propertyPath: wwiseEventMaintain
+      value: Point
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4999,7 +5035,7 @@ MonoBehaviour:
   data:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 670882291f16848a9a3620d33e7fa498, type: 2}
+    WwiseObjectReference: {fileID: 11400000, guid: 1ca3f56cc84f3478481f813ed72ff269, type: 2}
   useCallbacks: 0
   stopSoundOnDestroy: 1
   Callbacks: []
@@ -5045,169 +5081,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   triggerObject: {fileID: 1577918954}
---- !u!1 &739568363
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 739568364}
-  - component: {fileID: 739568369}
-  - component: {fileID: 739568368}
-  - component: {fileID: 739568367}
-  - component: {fileID: 739568366}
-  - component: {fileID: 739568365}
-  m_Layer: 0
-  m_Name: EnterHoleSound (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &739568364
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 739568363}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 25.060001, y: -57.07, z: 10.77}
-  m_LocalScale: {x: 13.771399, y: 4.8880343, z: 11.508287}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1335385049}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &739568365
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 739568363}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73b5642663c024b029b1a80fcd9b03dd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  triggerList: f7f422d6
-  useOtherObject: 0
-  actionOnEventType: 0
-  curveInterpolation: 4
-  enableActionOnEvent: 0
-  data:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 44f357f03796f48179becd70caf1ebc5, type: 2}
-  useCallbacks: 0
-  stopSoundOnDestroy: 1
-  Callbacks: []
-  soundEmitterObject: {fileID: 0}
-  transitionDuration: 0
-  eventIdInternal: 0
-  valueGuidInternal: 
-  m_callbackDataInternal: {fileID: 0}
---- !u!114 &739568366
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 739568363}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 804faa476cec34cdd92113bd7393031d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_listeners:
-    initialListenerList: []
-    useDefaultListeners: 1
-  isEnvironmentAware: 1
-  isStaticObject: 0
-  usePositionOffsetData: 0
-  m_positionOffsetData:
-    KeepMe: 0
-    positionOffset: {x: 0, y: 0, z: 0}
-  scalingFactor: 1
-  m_posOffsetData: {fileID: 0}
-  listenerMask: 1
---- !u!135 &739568367
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 739568363}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &739568368
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 739568363}
-  m_Enabled: 0
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &739568369
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 739568363}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!4 &781312041 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1985957284928018396, guid: 896e6524172674cae81e86d04adc43d8, type: 3}
@@ -6279,6 +6152,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2866883587052183346}
     m_Modifications:
+    - target: {fileID: -4591244472226359917, guid: fee5f6d1ad0cd4298bc1e415dbc5e635, type: 3}
+      propertyPath: wwiseEventStart
+      value: Rope
+      objectReference: {fileID: 0}
+    - target: {fileID: -4591244472226359917, guid: fee5f6d1ad0cd4298bc1e415dbc5e635, type: 3}
+      propertyPath: wwiseEventReturn
+      value: Rope
+      objectReference: {fileID: 0}
+    - target: {fileID: -4591244472226359917, guid: fee5f6d1ad0cd4298bc1e415dbc5e635, type: 3}
+      propertyPath: wwiseEventMaintain
+      value: Point
+      objectReference: {fileID: 0}
     - target: {fileID: 2682969567485887222, guid: fee5f6d1ad0cd4298bc1e415dbc5e635, type: 3}
       propertyPath: m_Name
       value: "\u6C34\u6EF4\u80CE\u513F-\u9636\u6BB51 (4)"
@@ -6452,7 +6337,7 @@ MonoBehaviour:
   data:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 670882291f16848a9a3620d33e7fa498, type: 2}
+    WwiseObjectReference: {fileID: 11400000, guid: 17b0ba6a372a1457d9af85e83b4bd4e8, type: 2}
   useCallbacks: 0
   stopSoundOnDestroy: 1
   Callbacks: []
@@ -8243,7 +8128,6 @@ Transform:
   - {fileID: 334692743}
   - {fileID: 152034307}
   - {fileID: 1768808420}
-  - {fileID: 739568364}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1349900615
@@ -8439,7 +8323,7 @@ MonoBehaviour:
   data:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 670882291f16848a9a3620d33e7fa498, type: 2}
+    WwiseObjectReference: {fileID: 11400000, guid: 17b0ba6a372a1457d9af85e83b4bd4e8, type: 2}
   useCallbacks: 0
   stopSoundOnDestroy: 1
   Callbacks: []
@@ -9296,7 +9180,7 @@ MonoBehaviour:
   data:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 670882291f16848a9a3620d33e7fa498, type: 2}
+    WwiseObjectReference: {fileID: 11400000, guid: 17b0ba6a372a1457d9af85e83b4bd4e8, type: 2}
   useCallbacks: 0
   stopSoundOnDestroy: 1
   Callbacks: []
@@ -11083,7 +10967,7 @@ MonoBehaviour:
   data:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 670882291f16848a9a3620d33e7fa498, type: 2}
+    WwiseObjectReference: {fileID: 11400000, guid: 17b0ba6a372a1457d9af85e83b4bd4e8, type: 2}
   useCallbacks: 0
   stopSoundOnDestroy: 1
   Callbacks: []
@@ -11950,6 +11834,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3701474509175352272, guid: 2e62ae5991dd84dc7bfd68a31759ee24, type: 3}
+      propertyPath: wwiseEventStart
+      value: Rope
+      objectReference: {fileID: 0}
+    - target: {fileID: 3701474509175352272, guid: 2e62ae5991dd84dc7bfd68a31759ee24, type: 3}
+      propertyPath: wwiseEventReturn
+      value: Rope
+      objectReference: {fileID: 0}
+    - target: {fileID: 3701474509175352272, guid: 2e62ae5991dd84dc7bfd68a31759ee24, type: 3}
+      propertyPath: wwiseEventMaintain
+      value: Point
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11968,6 +11864,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2866883587052183346}
     m_Modifications:
+    - target: {fileID: -6329243963032306695, guid: 6cbbbb7bdcf234b8387f81bf747d2052, type: 3}
+      propertyPath: wwiseEventStart
+      value: Rope
+      objectReference: {fileID: 0}
+    - target: {fileID: -6329243963032306695, guid: 6cbbbb7bdcf234b8387f81bf747d2052, type: 3}
+      propertyPath: wwiseEventReturn
+      value: Rope
+      objectReference: {fileID: 0}
+    - target: {fileID: -6329243963032306695, guid: 6cbbbb7bdcf234b8387f81bf747d2052, type: 3}
+      propertyPath: wwiseEventMaintain
+      value: Point
+      objectReference: {fileID: 0}
     - target: {fileID: 5970454580372444733, guid: 6cbbbb7bdcf234b8387f81bf747d2052, type: 3}
       propertyPath: m_Name
       value: "\u6C34\u6EF4\u80CE\u513F-\u9636\u6BB54"
@@ -12064,6 +11972,18 @@ PrefabInstance:
     - target: {fileID: 112427462912078941, guid: c1db5091f7988451f86e6e5bfb18c031, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 654175519135814285, guid: c1db5091f7988451f86e6e5bfb18c031, type: 3}
+      propertyPath: wwiseEventStart
+      value: Rope
+      objectReference: {fileID: 0}
+    - target: {fileID: 654175519135814285, guid: c1db5091f7988451f86e6e5bfb18c031, type: 3}
+      propertyPath: wwiseEventReturn
+      value: Rope
+      objectReference: {fileID: 0}
+    - target: {fileID: 654175519135814285, guid: c1db5091f7988451f86e6e5bfb18c031, type: 3}
+      propertyPath: wwiseEventMaintain
+      value: Point
       objectReference: {fileID: 0}
     - target: {fileID: 775952302739500775, guid: c1db5091f7988451f86e6e5bfb18c031, type: 3}
       propertyPath: m_Name
@@ -12333,6 +12253,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2866883587052183346}
     m_Modifications:
+    - target: {fileID: -4591244472226359917, guid: fee5f6d1ad0cd4298bc1e415dbc5e635, type: 3}
+      propertyPath: wwiseEventStart
+      value: Rope
+      objectReference: {fileID: 0}
+    - target: {fileID: -4591244472226359917, guid: fee5f6d1ad0cd4298bc1e415dbc5e635, type: 3}
+      propertyPath: wwiseEventReturn
+      value: Rope
+      objectReference: {fileID: 0}
+    - target: {fileID: -4591244472226359917, guid: fee5f6d1ad0cd4298bc1e415dbc5e635, type: 3}
+      propertyPath: wwiseEventMaintain
+      value: Point
+      objectReference: {fileID: 0}
     - target: {fileID: 2682969567485887222, guid: fee5f6d1ad0cd4298bc1e415dbc5e635, type: 3}
       propertyPath: m_Name
       value: "\u6C34\u6EF4\u80CE\u513F-\u9636\u6BB51"
@@ -12437,6 +12369,18 @@ PrefabInstance:
     - target: {fileID: 2108838140847895196, guid: 2e62ae5991dd84dc7bfd68a31759ee24, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3701474509175352272, guid: 2e62ae5991dd84dc7bfd68a31759ee24, type: 3}
+      propertyPath: wwiseEventStart
+      value: Rope
+      objectReference: {fileID: 0}
+    - target: {fileID: 3701474509175352272, guid: 2e62ae5991dd84dc7bfd68a31759ee24, type: 3}
+      propertyPath: wwiseEventReturn
+      value: Rope
+      objectReference: {fileID: 0}
+    - target: {fileID: 3701474509175352272, guid: 2e62ae5991dd84dc7bfd68a31759ee24, type: 3}
+      propertyPath: wwiseEventMaintain
+      value: Point
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -59,10 +59,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81180773991d8724ab7f2d216912b564, type: 3}
   m_Name: ChromaticAberration
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   intensity:
     m_OverrideState: 1
-    m_Value: 0.196
+    m_Value: 0.175
 --- !u!114 &-3357603926938260329
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -114,8 +114,8 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: 1
   fogStartDistance:
-    m_OverrideState: 0
-    m_Value: 0
+    m_OverrideState: 1
+    m_Value: 30
   fogEndDistance:
     m_OverrideState: 0
     m_Value: 600
@@ -124,7 +124,7 @@ MonoBehaviour:
     m_Value: 0
   fogColor:
     m_OverrideState: 1
-    m_Value: {r: 0.091091126, g: 0.10895048, b: 0.21698111, a: 1}
+    m_Value: {r: 0.3962264, g: 0.3962264, b: 0.3962264, a: 1}
   fogColorGradient:
     m_OverrideState: 0
     m_Value: {fileID: 0}
@@ -136,16 +136,16 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 1
   distanceFog:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 1
   distanceDensity:
-    m_OverrideState: 0
-    m_Value: 1
+    m_OverrideState: 1
+    m_Value: 5.61
   useRadialDistance:
     m_OverrideState: 0
     m_Value: 1
   horizonMinMax:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: {x: 0, y: 1}
   skyboxInfluence:
     m_OverrideState: 0
@@ -172,8 +172,8 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 1
   lightExponent:
-    m_OverrideState: 0
-    m_Value: 8
+    m_OverrideState: 1
+    m_Value: 31.2
   heightFog:
     m_OverrideState: 0
     m_Value: 0
@@ -250,7 +250,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97c23e3b12dc18c42a140437e53d3951, type: 3}
   m_Name: Tonemapping
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   mode:
     m_OverrideState: 1
     m_Value: 1
@@ -305,10 +305,10 @@ MonoBehaviour:
     m_Value: 0
   endFadeDistance:
     m_OverrideState: 1
-    m_Value: 2000
+    m_Value: 500
   amount:
     m_OverrideState: 1
-    m_Value: 1.8
+    m_Value: 0.42
   iterations:
     m_OverrideState: 0
     m_Value: 6
@@ -331,10 +331,10 @@ MonoBehaviour:
   active: 1
   postExposure:
     m_OverrideState: 1
-    m_Value: 0.96
+    m_Value: 0.5
   contrast:
     m_OverrideState: 1
-    m_Value: 48
+    m_Value: 70
   colorFilter:
     m_OverrideState: 0
     m_Value: {r: 0.6415094, g: 0.6415094, b: 0.6415094, a: 1}
@@ -343,7 +343,7 @@ MonoBehaviour:
     m_Value: 0
   saturation:
     m_OverrideState: 1
-    m_Value: -100
+    m_Value: -39
 --- !u!114 &4424816588992792318
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -365,7 +365,7 @@ MonoBehaviour:
     m_Value: {x: 1, y: 1, z: 1, w: -0.40280205}
   gain:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 1, z: 1, w: -0.22767074}
+    m_Value: {x: 1, y: 1, z: 1, w: -0.24612577}
 --- !u!114 &4473031408972416268
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -378,7 +378,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29fa0085f50d5e54f8144f766051a691, type: 3}
   m_Name: FilmGrain
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   type:
     m_OverrideState: 1
     m_Value: 0
