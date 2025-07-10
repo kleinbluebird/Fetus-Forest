@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class DropletInteractionController : MonoBehaviour
@@ -11,6 +12,7 @@ public class DropletInteractionController : MonoBehaviour
     private bool isPlayerNear = false;
     private bool isMoving = false; // 是否需要移动
     
+    private Coroutine delayReturnCoroutine; // 用于控制回升的延时协程
     private VerticalOscillator oscillator;
     
     private Material dropletMaterial;
@@ -119,16 +121,43 @@ public class DropletInteractionController : MonoBehaviour
     {
         if (isPlayerNear != near)
         {
-            isPlayerNear = near;
-            // Debug.Log($"[SetPlayerNear] Changing to {(near ? "NEAR" : "FAR")}, current local Y before oscillator = {transform.localPosition.y:F3}");
-            isMoving = true;
-
-            if (near && oscillator != null)
+            if (near)
             {
-                oscillator.enabled = false;
-                // Debug.Log($"[Oscillator] Now enabled = {!near}, after enabling, Y = {transform.localPosition.y:F3}");
+                // 玩家靠近，立即取消延时回升
+                if (delayReturnCoroutine != null)
+                {
+                    StopCoroutine(delayReturnCoroutine);
+                    delayReturnCoroutine = null;
+                }
+
+                if (!isPlayerNear)
+                {
+                    isPlayerNear = true;
+                    isMoving = true;
+                    if (oscillator != null) oscillator.enabled = false;
+                }
             }
+            else
+            {
+                // 玩家离开，开启延时回升
+                if (isPlayerNear && delayReturnCoroutine == null)
+                {
+                    delayReturnCoroutine = StartCoroutine(DelayReturn());
+                }
+            }
+            
         }
+    }
+    
+    private IEnumerator DelayReturn()
+    {
+        yield return new WaitForSeconds(3f); // 延迟 3 秒再恢复状态
+
+        isPlayerNear = false;
+        isMoving = true;
+        delayReturnCoroutine = null;
+        
+        // Debug.Log($"[Droplet] {gameObject.name} 玩家离开后 xx 秒，开始回升");
     }
 
     void OnDestroy()

@@ -137,12 +137,12 @@ public class PlayerController : MonoBehaviour
         if (playerPos.y >= triggerHeight)
         {
             // 玩家已达到指定高度，检测邻近水滴
-            List<DropletInteractionController> nearby = WaterDropletGridManager.Instance.GetNearbyDroplets(playerPos, checkRadius);
+            DropletInteractionController focusedDroplet = WaterDropletGridManager.Instance.GetFocusedDroplet(playerPos, checkRadius);
 
             foreach (DropletInteractionController droplet in allDroplets)
             {
-                bool isNear = nearby.Contains(droplet);
-                droplet.SetPlayerNear(isNear);
+                bool isFocused = droplet == focusedDroplet;
+                droplet.SetPlayerNear(isFocused);
             }
         }
         else
