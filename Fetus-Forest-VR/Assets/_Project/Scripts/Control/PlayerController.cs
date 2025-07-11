@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Collections.Generic;
 
@@ -21,6 +22,15 @@ public class PlayerController : MonoBehaviour
     [Header("Click Moving")]
     public LayerMask clickLayerMask;
     public float autoMoveSpeed = 3f;
+    
+    [Header("Rotation Restriction When Near Wall")]
+    public float wallDetectDistance = 0.5f;
+    public float restrictedYawAngle = 15f; // 摄像头最大左右角度范围
+    public LayerMask wallLayerMask;
+
+    private float restrictedYawCenter;     // 当前摄像头被限制旋转时的中心值
+    private bool isYawRestricted = false;
+    
 
     private Rigidbody rb;
     private Vector2 lookInput;
@@ -41,6 +51,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         HandleLook();
+        CheckCameraRotationRestriction();
         HandleMouseClickMovement();
     }
 
@@ -55,11 +66,38 @@ public class PlayerController : MonoBehaviour
     {
         lookInput.x += Input.GetAxis("Mouse X") * mouseSensitivity;
         lookInput.y -= Input.GetAxis("Mouse Y") * mouseSensitivity;
-        lookInput.y = Mathf.Clamp(lookInput.y, -85f, 85f);
+        lookInput.y = Mathf.Clamp(lookInput.y, -60f, 60f);
 
         cameraTransform.localRotation = Quaternion.Euler(lookInput.y, 0f, 0f);
         transform.rotation = Quaternion.Euler(0f, lookInput.x, 0f);
     }
+    
+    void CheckCameraRotationRestriction()
+    {
+        Vector3 origin = cameraTransform.position;
+        Vector3 forward = cameraTransform.forward;
+
+        if (Physics.Raycast(origin, forward, out RaycastHit hit, wallDetectDistance, wallLayerMask))
+        {
+            if (!isYawRestricted)
+            {
+                // 第一次接近墙体：记录此刻作为 yaw 中心
+                restrictedYawCenter = lookInput.x;
+                isYawRestricted = true;
+            }
+
+            // 限制 yaw 范围（左右不能转太多）
+            float minYaw = restrictedYawCenter - restrictedYawAngle;
+            float maxYaw = restrictedYawCenter + restrictedYawAngle;
+            lookInput.x = Mathf.Clamp(lookInput.x, minYaw, maxYaw);
+        }
+        else
+        {
+            // 离开墙体，恢复自由旋转
+            isYawRestricted = false;
+        }
+    }
+    
 
     void HandleMovement()
     {
