@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
@@ -11,8 +12,12 @@ public class PlayerController : MonoBehaviour
     public float drag = 2f;
 
     [Header("Mouse Control")]
-    public float mouseSensitivity = 2f;
+    public float lookSmoothSpeed = 10f;
+    public float mouseSensitivity = 1.5f;
     public Transform cameraTransform;
+    private float pitch; // X轴旋转（上下）
+    private float yaw;   // Y轴旋转（左右）
+    private Vector2 smoothedLook;
 
     [Header("Space limitation")]
     public float waterSurfaceY = -1f;
@@ -33,12 +38,45 @@ public class PlayerController : MonoBehaviour
     
 
     private Rigidbody rb;
+    private Vector2 moveInput;
     private Vector2 lookInput;
+    private bool floatUpPressed;
+    private bool floatDownPressed;
+    private bool clickMoveTriggered;
+
     private Vector3? targetPosition;
+    
+    private PlayerInputActions inputActions;
+
+    void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+        inputActions = new PlayerInputActions();
+
+        inputActions.Player.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
+        inputActions.Player.Move.canceled += ctx => moveInput = Vector2.zero;
+
+        inputActions.Player.Look.performed += ctx => lookInput = ctx.ReadValue<Vector2>();
+        inputActions.Player.Look.canceled += ctx => lookInput = Vector2.zero;
+
+        inputActions.Player.FloatUp.performed += ctx => floatUpPressed = true;
+        inputActions.Player.FloatUp.canceled += ctx => floatUpPressed = false;
+
+        inputActions.Player.FloatDown.performed += ctx => floatDownPressed = true;
+        inputActions.Player.FloatDown.canceled += ctx => floatDownPressed = false;
+
+        inputActions.Player.ClickMove.performed += ctx => clickMoveTriggered = true;
+    }
+
+    void OnEnable() => inputActions.Player.Enable();
+    void OnDisable() => inputActions.Player.Disable();
+    
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        
         rb.useGravity = false;
         rb.linearDamping = drag;
         rb.angularDamping = 0.5f;
@@ -50,6 +88,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        lookInput = inputActions.Player.Look.ReadValue<Vector2>();
         HandleLook();
         CheckCameraRotationRestriction();
         HandleMouseClickMovement();
@@ -64,55 +103,50 @@ public class PlayerController : MonoBehaviour
 
     void HandleLook()
     {
-        lookInput.x += Input.GetAxis("Mouse X") * mouseSensitivity;
-        lookInput.y -= Input.GetAxis("Mouse Y") * mouseSensitivity;
-        lookInput.y = Mathf.Clamp(lookInput.y, -60f, 60f);
+        // 平滑鼠标输入
+        smoothedLook = Vector2.Lerp(smoothedLook, lookInput, lookSmoothSpeed * Time.deltaTime);
+        Vector2 mouseDelta = smoothedLook * mouseSensitivity;
 
-        cameraTransform.localRotation = Quaternion.Euler(lookInput.y, 0f, 0f);
-        transform.rotation = Quaternion.Euler(0f, lookInput.x, 0f);
+        // 更新旋转角度
+        yaw += mouseDelta.x;
+        pitch -= mouseDelta.y;
+
+        // 限制 pitch（上下视角）
+        pitch = Mathf.Clamp(pitch, -85f, 85f);
+
+        // 应用旋转（只操作摄像机，不动角色物体本体）
+        cameraTransform.localRotation = Quaternion.Euler(pitch, yaw, 0f);
     }
     
-    void CheckCameraRotationRestriction()
-    {
-        Vector3 origin = cameraTransform.position;
-        Vector3 forward = cameraTransform.forward;
-
-        if (Physics.Raycast(origin, forward, out RaycastHit hit, wallDetectDistance, wallLayerMask))
-        {
-            if (!isYawRestricted)
-            {
-                // 第一次接近墙体：记录此刻作为 yaw 中心
-                restrictedYawCenter = lookInput.x;
-                isYawRestricted = true;
-            }
-
-            // 限制 yaw 范围（左右不能转太多）
-            float minYaw = restrictedYawCenter - restrictedYawAngle;
-            float maxYaw = restrictedYawCenter + restrictedYawAngle;
-            lookInput.x = Mathf.Clamp(lookInput.x, minYaw, maxYaw);
-        }
-        else
-        {
-            // 离开墙体，恢复自由旋转
-            isYawRestricted = false;
-        }
-    }
-    
-
     void HandleMovement()
     {
-        Vector3 inputDirection = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
-		//Debug.Log("Input Direction: " + inputDirection); 
-        inputDirection = transform.TransformDirection(inputDirection);
+        // 判断是否有主动输入（键盘或鼠标）
+        bool hasMovementInput = moveInput != Vector2.zero || floatUpPressed || floatDownPressed;
+        bool hasMouseClick = Mouse.current.leftButton.wasPressedThisFrame;
 
-        // 上浮/下潜
-        if (Input.GetKey(KeyCode.E)) inputDirection.y += 1f;
-        if (Input.GetKey(KeyCode.Q)) inputDirection.y -= 1f;
+        // 如果有输入，取消自动移动目标
+        if (hasMovementInput || hasMouseClick)
+        {
+            targetPosition = null;
+        }
+
+        // 基于摄像机方向的移动
+        Vector3 camForward = cameraTransform.forward;
+        Vector3 camRight = cameraTransform.right;
+        camForward.y = 0f;
+        camRight.y = 0f;
+        camForward.Normalize();
+        camRight.Normalize();
+
+        Vector3 inputDirection = (camForward * moveInput.y + camRight * moveInput.x);
+
+        if (floatUpPressed) inputDirection.y += 1f;
+        if (floatDownPressed) inputDirection.y -= 1f;
 
         inputDirection.Normalize();
         rb.AddForce(inputDirection * moveSpeed);
 
-        // 如果点击移动目标存在，则推动玩家朝目标前进
+        // 自动点击移动（如果未被打断）
         if (targetPosition.HasValue)
         {
             Vector3 directionToTarget = (targetPosition.Value - transform.position).normalized;
@@ -121,11 +155,25 @@ public class PlayerController : MonoBehaviour
             float distance = Vector3.Distance(transform.position, targetPosition.Value);
             if (distance < 1f)
             {
-                targetPosition = null; // 到达目标点
+                targetPosition = null;
             }
         }
     }
+    
+    void HandleMouseClickMovement()
+    {
+        if (clickMoveTriggered)
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+            if (Physics.Raycast(ray, out RaycastHit hit, 100f, clickLayerMask))
+            {
+                targetPosition = hit.point;
+            }
 
+            clickMoveTriggered = false; // 重置触发状态
+        }
+    }
+    
     void ClampPositionWithinBounds()
     {
         Vector3 pos = transform.position;
@@ -147,20 +195,36 @@ public class PlayerController : MonoBehaviour
             rb.linearVelocity = Vector3.zero;
         }
     }
-
-    void HandleMouseClickMovement()
+    
+    void CheckCameraRotationRestriction()
     {
-        if (Input.GetMouseButtonDown(0))
+        Vector3 origin = cameraTransform.position;
+        Vector3 forward = cameraTransform.forward;
+
+        if (Physics.Raycast(origin, forward, out RaycastHit hit, wallDetectDistance, wallLayerMask))
         {
-			//Debug.Log("Mouse Clicked");
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit hit, 100f, clickLayerMask))
+            if (!isYawRestricted)
             {
-                targetPosition = hit.point;
+                // 第一次接近墙体：记录此刻作为 yaw 中心
+                restrictedYawCenter = transform.eulerAngles.y;
+                isYawRestricted = true;
             }
+
+            // 限制 yaw 范围（左右不能转太多）
+            float currentYaw = transform.eulerAngles.y;
+            float minYaw = restrictedYawCenter - restrictedYawAngle;
+            float maxYaw = restrictedYawCenter + restrictedYawAngle;
+            float clampedYaw = Mathf.Clamp(currentYaw, minYaw, maxYaw);
+            transform.rotation = Quaternion.Euler(0f, clampedYaw, 0f);
+        }
+        else
+        {
+            // 离开墙体，恢复自由旋转
+            isYawRestricted = false;
         }
     }
-    
+
+
     void CheckNearbyDroplets()
     {
         if (WaterDropletGridManager.Instance == null) return;
