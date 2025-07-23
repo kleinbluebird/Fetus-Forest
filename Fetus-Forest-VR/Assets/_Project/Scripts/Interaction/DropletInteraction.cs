@@ -20,48 +20,71 @@ public class DropletInteractionController : MonoBehaviour
     private Color targetRimColor = new Color(0.9f, 0.9f, 0.9f, 1f);
     private Color currentRimColor;
     
+    private Material distortionMaterial;
+    private float initialStrength = 0.05f;
+    private float minStrength = 0.02f;
+    
     void Start()
     {
         originalY = transform.localPosition.y;
         currentYValue = originalY;
         oscillator = GetComponent<VerticalOscillator>();
 
-        // 从所有子物体中找到名字为 "Babe Inner" 的材质，并实例化
+        // 从所有子物体中找到目标材质，并实例化
         Renderer[] renderers = GetComponentsInChildren<Renderer>(true); // 包括不激活的子物体
         foreach (Renderer rend in renderers)
         {
             Material[] materials = rend.materials; // 复制当前材质数组
             
+            bool updated = false; // 只在找到材质后才重新赋值 materials
+            
             for (int i = 0; i < materials.Length; i++)
             {
                 Material mat = materials[i];
-                if (mat != null && mat.name.Contains("Babe Inner"))
+                if (mat == null) continue;
+                
+                // Babe Inner 材质
+                if (dropletMaterial == null && mat.name.Contains("Babe Inner"))
                 {
-                    // 实例化材质
                     Material newMat = Instantiate(mat);
-                    materials[i] = newMat; // 替换副本数组中对应项
-                    rend.materials = materials; // 设置回 renderer 的材质数组
-
+                    materials[i] = newMat;
                     dropletMaterial = newMat;
                     currentRimColor = initialRimColor;
-
-                    // 设置颜色参数
                     dropletMaterial.SetColor("_StylingRimColor", currentRimColor);
+                    updated = true;
 
-                    // 打印调试
-                    // Debug.Log($"[Droplet] 替换材质成功: {newMat.name}");
-                    // Debug.Log($"[Rim Debug] EnableRimStyling: {dropletMaterial.GetFloat("_EnableRimStyling")}");
-                    // Debug.Log($"[Rim Debug] StylingRimColor: {dropletMaterial.GetColor("_StylingRimColor")}");
-                    break;
+                    // Debug.Log($"[Init] 成功绑定 Babe Inner 材质: {newMat.name}");
+                }
+                
+                // Distortion 材质
+                if (distortionMaterial == null && mat.name.Contains("DistortionWaterURP"))
+                {
+                    Material newMat = Instantiate(mat);
+                    materials[i] = newMat;
+                    distortionMaterial = newMat;
+                    distortionMaterial.SetFloat("_Strength", initialStrength);
+                    updated = true;
+
+                    // Debug.Log($"[Distortion Init] 成功绑定 DistortionWaterURP 材质: {newMat.name}");
                 }
             }
-
-            if (dropletMaterial != null) break; // 已经找到并设置，不再继续
+            if (updated)
+            {
+                rend.materials = materials; // 只有在材质被替换后才重新赋值
+            }
+                
+            // 如果都找到就提前跳出
+            if (dropletMaterial != null && distortionMaterial != null) break;
         }
 
         if (dropletMaterial == null)
         {
-            Debug.LogWarning($"[Droplet] Could not find 'Babe Inner' material on children of {gameObject.name}");
+            Debug.LogWarning($"[Droplet] Could not find “Babe Inner” material on children of {gameObject.name}");
+        }
+     
+        if (distortionMaterial == null)
+        {
+            Debug.LogWarning($"[Droplet] Could not find “DistortionWaterURP” material on children of {gameObject.name}");
         }
 
         
@@ -102,6 +125,17 @@ public class DropletInteractionController : MonoBehaviour
         else
         {
             Debug.LogWarning("Droplet material is null!");
+        }
+        
+        // Distortion Strength 插值
+        if (distortionMaterial != null)
+        {
+            // 计算位置插值比例：0（在原始位置）到 1（在sinkTargetY）
+            float normalizedY = Mathf.InverseLerp(originalY, sinkTargetY, currentYValue);
+    
+            // 插值计算 strength
+            float currentStrength = Mathf.Lerp(initialStrength, minStrength, normalizedY);
+            distortionMaterial.SetFloat("_Strength", currentStrength);
         }
 
         

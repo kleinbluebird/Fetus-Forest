@@ -194,7 +194,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: a95c2a47f0a03464cb03122277a14df5, type: 2}
     - target: {fileID: 919132149155446097, guid: f7a49a2c3f87c480f85ea7fb3d5ea789, type: 3}
       propertyPath: m_Name
-      value: "\u795E\u7ECF\u7A81\u89E6-\u66F4\u65B0 5"
+      value: "\u795E\u7ECF\u7A81\u89E6-\u66F4\u65B0"
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: f7a49a2c3f87c480f85ea7fb3d5ea789, type: 3}
       propertyPath: m_StaticEditorFlags
