@@ -4383,7 +4383,7 @@ Transform:
   m_GameObject: {fileID: 558424142}
   serializedVersion: 2
   m_LocalRotation: {x: 0.15499319, y: 0.6519671, z: -0.13857988, w: 0.72918564}
-  m_LocalPosition: {x: 15, y: -49, z: 0.46}
+  m_LocalPosition: {x: 22.5, y: -49, z: 0.46}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10702,6 +10702,10 @@ PrefabInstance:
       value: "\u8346\u68D8\u6F29\u6DA1-\u5360\u4F4D"
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ccf4f2ed279f6494bae4dd90e032051a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ccf4f2ed279f6494bae4dd90e032051a, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -10900,8 +10904,9 @@ MonoBehaviour:
   vfxGraph: {fileID: 930976154}
   eyeObject: {fileID: 1486446882}
   alphaParam: _Alpha
-  showDuration: 3
-  fadeDuration: 40
+  showDuration: 1
+  fadeDuration: 10
+  spriteAnimator: {fileID: 1486446889}
 --- !u!4 &1428270344 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7807398432480806697, guid: dabc3ff408fe14e8c95efcc0c5ab3478, type: 3}
@@ -11153,6 +11158,7 @@ GameObject:
   - component: {fileID: 1486446884}
   - component: {fileID: 1486446883}
   - component: {fileID: 1486446888}
+  - component: {fileID: 1486446889}
   m_Layer: 0
   m_Name: Animated_Eye
   m_TagString: Untagged
@@ -11264,6 +11270,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetCamera: {fileID: 330585545}
   rotationSpeed: 1
+--- !u!114 &1486446889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1486446882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77cbd7b394321463da1034d613f82145, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clips:
+  - texture: {fileID: 2800000, guid: 09343d07065754983aebfcd840a465c1, type: 3}
+    rows: 4
+    columns: 7
+    totalFrames: 26
+    fps: 2
+  - texture: {fileID: 2800000, guid: 180a0c740ecff44a1aacdfaff643e919, type: 3}
+    rows: 6
+    columns: 7
+    totalFrames: 39
+    fps: 2
+  - texture: {fileID: 2800000, guid: 4c0f124d899504f498114c9e58ca33d0, type: 3}
+    rows: 3
+    columns: 7
+    totalFrames: 20
+    fps: 2
+  targetRenderer: {fileID: 1486446884}
 --- !u!1001 &1486715113
 PrefabInstance:
   m_ObjectHideFlags: 0

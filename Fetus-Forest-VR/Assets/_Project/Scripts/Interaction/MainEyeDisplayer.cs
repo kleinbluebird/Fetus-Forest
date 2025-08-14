@@ -1,17 +1,19 @@
 using UnityEngine;
 using UnityEngine.VFX;
+using System.Collections;
 
 public class MainEyeDisplayer : MonoBehaviour
 {
     public VisualEffect vfxGraph;
     public GameObject eyeObject;
-    public string alphaParam = "_Alpha"; 
+    public string alphaParam = "_Alpha";
     public float showDuration = 2f;
     public float fadeDuration = 10f;
-    
+    public SequentialSpriteAnimator spriteAnimator; // 新增动画播放器引用
+
     private Material eyeMaterial;
     private bool hasTriggered = false;
-    
+
     void Start()
     {
         if (eyeObject != null)
@@ -19,40 +21,61 @@ public class MainEyeDisplayer : MonoBehaviour
             Renderer rend = eyeObject.GetComponent<Renderer>();
             if (rend != null)
             {
-                // 使用实例材质，避免影响共享材质
-                eyeMaterial = rend.material;
+                eyeMaterial = rend.material; // 独立材质
                 eyeMaterial.SetFloat(alphaParam, 0f);
             }
         }
+
+        if (spriteAnimator != null)
+        {
+            spriteAnimator.OnAllAnimationsFinished += HandleAnimationFinished;
+        }
     }
-    
+
     private void OnTriggerEnter(Collider other)
     {
         if (!hasTriggered && other.CompareTag("Player"))
         {
             hasTriggered = true;
-            StartCoroutine(FadeIn());
+            StartCoroutine(FadeInAndPlayAnimation());
         }
     }
-    
-    private System.Collections.IEnumerator FadeIn()
+
+    private IEnumerator FadeInAndPlayAnimation()
     {
         float time = 0f;
 
-        while (time < showDuration || time < fadeDuration)
+        // 播放动画
+        if (spriteAnimator != null)
+        {
+            spriteAnimator.Play();
+        }
+        
+        // 渐显
+        while (time < showDuration)
         {
             float alpha = Mathf.Lerp(0f, 1f, time / showDuration);
             eyeMaterial.SetFloat(alphaParam, alpha);
-            
-            float vfxAlpha = Mathf.Lerp(1f, 0f, time / fadeDuration);
-            vfxGraph.SetFloat("Alpha", vfxAlpha);
-            
             time += Time.deltaTime;
             yield return null;
         }
 
-        // 确保最终值是 1
         eyeMaterial.SetFloat(alphaParam, 1f);
+
+        // 同时渐隐 VFX
+        float vfxTime = 0f;
+        while (vfxTime < fadeDuration)
+        {
+            float vfxAlpha = Mathf.Lerp(1f, 0f, vfxTime / fadeDuration);
+            vfxGraph.SetFloat("Alpha", vfxAlpha);
+            vfxTime += Time.deltaTime;
+            yield return null;
+        }
         vfxGraph.SetFloat("Alpha", 0f);
+    }
+
+    private void HandleAnimationFinished()
+    {
+        Debug.Log("MainEyeDisplayer: 所有帧动画播放完成，可以触发后续逻辑");
     }
 }
