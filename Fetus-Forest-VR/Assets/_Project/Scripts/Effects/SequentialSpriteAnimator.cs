@@ -16,6 +16,8 @@ public class SequentialSpriteAnimator : MonoBehaviour
     public AnimationClipData[] clips;
     public Renderer targetRenderer;
 
+    public PlayerConstraintController constraintController;
+    
     public event Action OnAllAnimationsFinished;
 
     private Material mat;
@@ -84,5 +86,21 @@ public class SequentialSpriteAnimator : MonoBehaviour
         clipStartTime = Time.time;
         
         Debug.Log($"[Animator] 加载 Clip {index + 1}: {clip.texture.name} | 行 {clip.rows} | 列 {clip.columns} | 总帧数 {clip.totalFrames} | FPS {clip.fps}");
+        
+        if (index == 0 && constraintController != null)
+        {
+            Debug.Log("[Animator] 触发玩家约束逻辑");
+            constraintController.StartConstraint();
+        }
+        
+        // 当播放到 Element3 (第4个 clip, index=3) 时触发环境过渡
+        if (index == 2)
+        {
+            var envManager = FindObjectOfType<EnvironmentTransitionManager>();
+            if (envManager != null)
+            {
+                envManager.TriggerEnvironmentTransition();
+            }
+        }
     }
 }

@@ -341,10 +341,10 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0, g: 0, b: 0, a: 0.5686275}
+    - _BaseColor: {r: 0, g: 0, b: 0, a: 1}
     - _CastShadowColor: {r: 0, g: 0, b: 0, a: 1}
     - _CastShadowsPolarCenter: {r: 0, g: 0, b: 0, a: 1}
-    - _Color: {r: 0, g: 0, b: 0, a: 0.5686275}
+    - _Color: {r: 0, g: 0, b: 0, a: 1}
     - _CoreShadowColor: {r: 0.16037738, g: 0.16037738, b: 0.16037738, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FormShadowColor: {r: 0, g: 0, b: 0, a: 1}
