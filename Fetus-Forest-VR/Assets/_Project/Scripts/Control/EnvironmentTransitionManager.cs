@@ -213,12 +213,32 @@ public class EnvironmentTransitionManager : MonoBehaviour
             yield return null;
         }
 
-        // 确保最终值
+        // 确保最终值（避免后续白场过渡阶段的跳变）
         if (trackVCam != null)
             trackVCam.Lens.FieldOfView = fovEnd;
 
         if (animatedEyeMat != null && animatedEyeMat.HasProperty(alphaProperty))
             animatedEyeMat.SetFloat(alphaProperty, eyeAlphaEnd);
+
+        // Silk UI 最终锁定
+        if (silkUIImage != null)
+        {
+            Color c = silkUIImage.color;
+            c.a = 1f;
+            silkUIImage.color = c;
+        }
+        if (silkUITransform != null)
+        {
+            float finalS = silkTargetScale;
+            silkUITransform.localScale = new Vector3(finalS, finalS, finalS);
+            Vector3 euler = silkUITransform.localEulerAngles;
+            // 将Z锁定到期望的最终值，避免角度插值与欧拉包裹导致的跳变
+            float targetZ = silkStartRotZ + silkRotationZDelta;
+            // 归一化到0..360，减少跨周跳变风险
+            targetZ = (targetZ % 360f + 360f) % 360f;
+            euler.z = targetZ;
+            silkUITransform.localEulerAngles = euler;
+        }
         
 
         // 触发白场过渡到新场景
