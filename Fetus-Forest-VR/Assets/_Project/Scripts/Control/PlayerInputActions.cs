@@ -71,6 +71,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PickUp"",
+                    ""type"": ""Button"",
+                    ""id"": ""6ba0b5df-65f7-4a34-b2cb-15154ca14900"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -172,6 +181,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""ClickMove"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""749da821-9e87-4496-90e7-b5ca676ceb2d"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PickUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -185,6 +205,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_FloatUp = m_Player.FindAction("FloatUp", throwIfNotFound: true);
         m_Player_FloatDown = m_Player.FindAction("FloatDown", throwIfNotFound: true);
         m_Player_ClickMove = m_Player.FindAction("ClickMove", throwIfNotFound: true);
+        m_Player_PickUp = m_Player.FindAction("PickUp", throwIfNotFound: true);
     }
 
     ~@PlayerInputActions()
@@ -256,6 +277,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_FloatUp;
     private readonly InputAction m_Player_FloatDown;
     private readonly InputAction m_Player_ClickMove;
+    private readonly InputAction m_Player_PickUp;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -265,6 +287,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @FloatUp => m_Wrapper.m_Player_FloatUp;
         public InputAction @FloatDown => m_Wrapper.m_Player_FloatDown;
         public InputAction @ClickMove => m_Wrapper.m_Player_ClickMove;
+        public InputAction @PickUp => m_Wrapper.m_Player_PickUp;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -289,6 +312,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @ClickMove.started += instance.OnClickMove;
             @ClickMove.performed += instance.OnClickMove;
             @ClickMove.canceled += instance.OnClickMove;
+            @PickUp.started += instance.OnPickUp;
+            @PickUp.performed += instance.OnPickUp;
+            @PickUp.canceled += instance.OnPickUp;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -308,6 +334,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @ClickMove.started -= instance.OnClickMove;
             @ClickMove.performed -= instance.OnClickMove;
             @ClickMove.canceled -= instance.OnClickMove;
+            @PickUp.started -= instance.OnPickUp;
+            @PickUp.performed -= instance.OnPickUp;
+            @PickUp.canceled -= instance.OnPickUp;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -332,5 +361,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnFloatUp(InputAction.CallbackContext context);
         void OnFloatDown(InputAction.CallbackContext context);
         void OnClickMove(InputAction.CallbackContext context);
+        void OnPickUp(InputAction.CallbackContext context);
     }
 }

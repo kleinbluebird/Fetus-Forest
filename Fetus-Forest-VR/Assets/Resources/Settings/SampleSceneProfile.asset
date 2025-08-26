@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b2db86121404754db890f4c8dfe81b2, type: 3}
   m_Name: Bloom
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   skipIterations:
     m_OverrideState: 1
     m_Value: 0
   threshold:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0.5
   intensity:
     m_OverrideState: 1
     m_Value: 0.25
@@ -115,7 +115,7 @@ MonoBehaviour:
     m_Value: 1
   fogStartDistance:
     m_OverrideState: 1
-    m_Value: 30
+    m_Value: -50
   fogEndDistance:
     m_OverrideState: 0
     m_Value: 600
@@ -140,7 +140,7 @@ MonoBehaviour:
     m_Value: 1
   distanceDensity:
     m_OverrideState: 1
-    m_Value: 5.61
+    m_Value: 5
   useRadialDistance:
     m_OverrideState: 0
     m_Value: 1
@@ -305,10 +305,10 @@ MonoBehaviour:
     m_Value: 0
   endFadeDistance:
     m_OverrideState: 1
-    m_Value: 500
+    m_Value: 1500
   amount:
     m_OverrideState: 1
-    m_Value: 0.42
+    m_Value: 0.4
   iterations:
     m_OverrideState: 0
     m_Value: 6
@@ -331,19 +331,19 @@ MonoBehaviour:
   active: 1
   postExposure:
     m_OverrideState: 1
-    m_Value: 0.5
+    m_Value: 0.64
   contrast:
     m_OverrideState: 1
     m_Value: 80
   colorFilter:
     m_OverrideState: 0
-    m_Value: {r: 0.6415094, g: 0.6415094, b: 0.6415094, a: 1}
+    m_Value: {r: 1, g: 1, b: 1, a: 1}
   hueShift:
     m_OverrideState: 0
     m_Value: 0
   saturation:
     m_OverrideState: 1
-    m_Value: -39
+    m_Value: -78
 --- !u!114 &4424816588992792318
 MonoBehaviour:
   m_ObjectHideFlags: 3

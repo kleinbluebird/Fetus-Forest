@@ -48,6 +48,10 @@ public class PlayerController : MonoBehaviour
     
     private PlayerInputActions inputActions;
 
+    [Header("Spawn Settings")]
+    public bool useCustomSpawn = true;
+    public Vector3 spawnPosition = new Vector3(0f, 7f, 0f);
+
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -82,6 +86,15 @@ public class PlayerController : MonoBehaviour
         rb.angularDamping = 0.5f;
         rb.interpolation = RigidbodyInterpolation.Interpolate;
         rb.freezeRotation = true;
+
+        // 初始化出生点
+        if (useCustomSpawn)
+        {
+            transform.position = spawnPosition;
+            rb.position = spawnPosition;
+            rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        }
 
         Cursor.lockState = CursorLockMode.Locked;
     }

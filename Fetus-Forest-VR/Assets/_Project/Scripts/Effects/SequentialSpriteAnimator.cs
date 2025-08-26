@@ -18,6 +18,12 @@ public class SequentialSpriteAnimator : MonoBehaviour
 
     public PlayerConstraintController constraintController;
     
+	[Header("Track Point 消失动画触发")]
+	[SerializeField] private bool enableTrackPointDisappearTrigger = false;
+	[SerializeField] private int triggerFrame = 11; // 在第几帧触发
+	[SerializeField] private TrackPoint targetTrackPoint; // 目标TrackPoint对象
+	[SerializeField] private string intoEyeTriggerParam = "IntoEye"; // 消失动画的触发器参数名
+	
     public event Action OnAllAnimationsFinished;
 
     private Material mat;
@@ -31,7 +37,7 @@ public class SequentialSpriteAnimator : MonoBehaviour
         mat = targetRenderer.material;
         targetRenderer.enabled = false; // 初始隐藏
         
-        Debug.Log($"[Animator] 已加载 {clips.Length} 段动画");
+        // Debug.Log($"[Animator] 已加载 {clips.Length} 段动画");
     }
 
     void Update()
@@ -41,17 +47,29 @@ public class SequentialSpriteAnimator : MonoBehaviour
         float elapsed = Time.time - clipStartTime;
         float clipDuration = clips[currentClip].totalFrames / clips[currentClip].fps;
         
+		// 计算当前帧数（只在第一个clip时计算）
+		if (currentClip == 0 && enableTrackPointDisappearTrigger && targetTrackPoint != null)
+		{
+			int currentFrame = Mathf.FloorToInt(elapsed * clips[currentClip].fps);
+			
+			// 检查是否到达触发帧
+			if (currentFrame == triggerFrame)
+			{
+				TriggerTrackPointDisappear();
+			}
+		}
+		
         // Debug.Log($"[Animator] 播放中 Clip {currentClip + 1}/{clips.Length} | 已播放 {elapsed:F2}s / 总时长 {clipDuration:F2}s");
 
         if (elapsed >= clipDuration)
         {
-            Debug.Log($"[Animator] Clip {currentClip + 1} 播放结束");
+            // Debug.Log($"[Animator] Clip {currentClip + 1} 播放结束");
             currentClip++;
 
             if (currentClip >= clips.Length)
             {
                 // 播放完成
-                Debug.Log("[Animator] 所有动画播放完成");
+                // Debug.Log("[Animator] 所有动画播放完成");
                 isPlaying = false;
                 targetRenderer.enabled = false;
                 OnAllAnimationsFinished?.Invoke();
@@ -85,11 +103,11 @@ public class SequentialSpriteAnimator : MonoBehaviour
 
         clipStartTime = Time.time;
         
-        Debug.Log($"[Animator] 加载 Clip {index + 1}: {clip.texture.name} | 行 {clip.rows} | 列 {clip.columns} | 总帧数 {clip.totalFrames} | FPS {clip.fps}");
+        // Debug.Log($"[Animator] 加载 Clip {index + 1}: {clip.texture.name} | 行 {clip.rows} | 列 {clip.columns} | 总帧数 {clip.totalFrames} | FPS {clip.fps}");
         
         if (index == 0 && constraintController != null)
         {
-            Debug.Log("[Animator] 触发玩家约束逻辑");
+            // Debug.Log("[Animator] 触发玩家约束逻辑");
             constraintController.StartConstraint();
         }
         
@@ -103,4 +121,24 @@ public class SequentialSpriteAnimator : MonoBehaviour
             }
         }
     }
+
+	private void TriggerTrackPointDisappear()
+	{
+		if (targetTrackPoint == null)
+		{
+			Debug.LogWarning("[SequentialSpriteAnimator] 目标TrackPoint未设置，无法触发消失动画");
+			return;
+		}
+		
+		Debug.Log($"[SequentialSpriteAnimator] 第{triggerFrame}帧触发TrackPoint消失动画");
+		
+		// 通过TrackPoint的公共方法触发消失动画
+		targetTrackPoint.TriggerDisappearAnimation(intoEyeTriggerParam);
+	}
+	
+	// 公共方法，用于外部手动触发
+	public void TriggerTrackPointDisappearManual()
+	{
+		TriggerTrackPointDisappear();
+	}
 }

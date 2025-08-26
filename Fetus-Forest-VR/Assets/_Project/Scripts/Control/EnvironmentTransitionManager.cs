@@ -33,6 +33,26 @@ public class EnvironmentTransitionManager : MonoBehaviour
     public float fovDuration = 5f;
     public float fovDelay = 2f;
 
+    [Header("Silk UI Linkage")]
+    public Image silkUIImage;                 // Silk UI 的 Image（用于Alpha）
+    public RectTransform silkUITransform;     // Silk UI 的 RectTransform（用于缩放/旋转）
+    public float silkTargetScale = 1.5f;      // FOV缩放期间目标缩放
+    public float silkRotationZDelta = -10f;    // FOV缩放期间Z轴增加角度
+
+    [Header("Player & Invisible Plane")]
+    public Transform playerTransform;          // 玩家实时位置
+    public Transform invisiblePlane;           // 仅使用其Y坐标
+    public float planeInfluenceRange = 1f;     // 与平面相距多少米内开始强影响
+    public float approachLerpSpeed = 2f;       // 接近时雾值逼近速度
+
+    [Header("Post & Fog Parameters")]
+    public float initialPostExposure = 0.64f;
+    public float pickupPostExposure = 0.48f;
+    public float initialFogDistance = -50f;        // 初始“Distance Density”对应的近距离（用Fog.fogStartDistance表示）
+    public float minApproachFogDistance = -200f;   // 玩家接近Invisible Plane时单向靠近的极限
+    public float pickupFogDistance = 30f;          // 拾取后快速散开的目标
+    public float pickupTransitionDuration = 0.6f;  // 拾取后过渡时长
+
     [Header("Animated Eye Settings")]
     // public Transform animatedEye;          // Animated_Eye GameObject
     // private Vector3 eyeOffset;             // 初始相对偏移
@@ -51,6 +71,10 @@ public class EnvironmentTransitionManager : MonoBehaviour
     public string nextSceneName;
     public float whiteFadeDuration = 1.5f;
     
+    private ColorAdjustments colorAdjustments;
+    private float bestVerticalDistance = float.MaxValue; // 历史最小 |player.y - plane.y|
+    private bool pickupTransitionTriggered;
+
     private void Start()
     {
         // 尝试获取Fog override
@@ -58,6 +82,11 @@ public class EnvironmentTransitionManager : MonoBehaviour
         {
             fog = f;
             fog.active = true;
+        }
+        // 尝试获取 Color Adjustments
+        if (globalVolume != null && globalVolume.profile.TryGet(out ColorAdjustments ca))
+        {
+            colorAdjustments = ca;
         }
         
         // if (animatedEye != null && trackVCam != null)
@@ -70,6 +99,16 @@ public class EnvironmentTransitionManager : MonoBehaviour
         if (animatedEyeRenderer != null)
         {
             animatedEyeMat = animatedEyeRenderer.material;
+        }
+
+        // 初始化后期与雾参数
+        if (colorAdjustments != null)
+        {
+            colorAdjustments.postExposure.Override(initialPostExposure);
+        }
+        if (fog != null)
+        {
+            fog.fogStartDistance.Override(initialFogDistance);
         }
     }
 
@@ -96,6 +135,20 @@ public class EnvironmentTransitionManager : MonoBehaviour
         }
         
         float elapsed = 0f;
+        // 记录Silk UI初始状态
+        float silkStartAlpha = 0f;
+        float silkStartScale = 1f;
+        float silkStartRotZ = 0f;
+        if (silkUIImage != null)
+        {
+            Color c = silkUIImage.color;
+            silkStartAlpha = c.a;
+        }
+        if (silkUITransform != null)
+        {
+            silkStartScale = silkUITransform.localScale.x;
+            silkStartRotZ = silkUITransform.localEulerAngles.z;
+        }
         // float startNormalized = dolly.CameraPosition;
         // float targetNormalized = 0.43f;
 
@@ -138,6 +191,25 @@ public class EnvironmentTransitionManager : MonoBehaviour
                 animatedEyeMat.SetFloat(alphaProperty, alpha);
             }
 
+            // Silk UI 渐变（Alpha → 1，Scale → silkTargetScale，RotationZ 增加 silkRotationZDelta）
+            {
+                float smoothT2 = Mathf.SmoothStep(0f, 1f, t);
+                if (silkUIImage != null)
+                {
+                    Color c = silkUIImage.color;
+                    c.a = Mathf.Lerp(silkStartAlpha, 1f, smoothT2);
+                    silkUIImage.color = c;
+                }
+                if (silkUITransform != null)
+                {
+                    float s = Mathf.Lerp(silkStartScale, silkTargetScale, smoothT2);
+                    silkUITransform.localScale = new Vector3(s, s, s);
+                    Vector3 euler = silkUITransform.localEulerAngles;
+                    euler.z = Mathf.LerpAngle(silkStartRotZ, silkStartRotZ + silkRotationZDelta, smoothT2);
+                    silkUITransform.localEulerAngles = euler;
+                }
+            }
+
             yield return null;
         }
 
@@ -151,6 +223,63 @@ public class EnvironmentTransitionManager : MonoBehaviour
 
         // 触发白场过渡到新场景
         StartCoroutine(FadeToWhiteAndLoadScene());
+    }
+
+    private void Update()
+    {
+        // 初始阶段：根据玩家与 Invisible Plane 的纵向接近，单向地让雾的 StartDistance 靠近 minApproachFogDistance（不可逆）
+        if (fog != null && playerTransform != null && invisiblePlane != null && !pickupTransitionTriggered)
+        {
+            float dy = Mathf.Abs(playerTransform.position.y - invisiblePlane.position.y);
+            if (dy < bestVerticalDistance) bestVerticalDistance = dy; // 记录历史最小值
+            float t = Mathf.Clamp01(1f - (bestVerticalDistance / Mathf.Max(0.0001f, planeInfluenceRange)));
+            float targetFog = Mathf.Lerp(initialFogDistance, minApproachFogDistance, t);
+            float current = fog.fogStartDistance.value;
+            float next = Mathf.Lerp(current, targetFog, Time.deltaTime * approachLerpSpeed);
+            fog.fogStartDistance.Override(next);
+        }
+    }
+
+    // 外部触发：玩家拾取第一个 Target 后调用
+    public void OnPlayerPickedTarget()
+    {
+        if (!pickupTransitionTriggered)
+        {
+            StartCoroutine(QuickPostAndFogAfterPickup());
+        }
+    }
+
+    private IEnumerator QuickPostAndFogAfterPickup()
+    {
+        pickupTransitionTriggered = true;
+        float elapsed = 0f;
+        float startPost = colorAdjustments != null ? colorAdjustments.postExposure.value : 0f;
+        float startFog = fog != null ? fog.fogStartDistance.value : 0f;
+        while (elapsed < pickupTransitionDuration)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsed / pickupTransitionDuration);
+            float smoothT = Mathf.SmoothStep(0f, 1f, t);
+            if (colorAdjustments != null)
+            {
+                colorAdjustments.postExposure.Override(Mathf.Lerp(startPost, pickupPostExposure, smoothT));
+            }
+            if (fog != null)
+            {
+                fog.fogStartDistance.Override(Mathf.Lerp(startFog, pickupFogDistance, smoothT));
+            }
+            yield return null;
+        }
+        if (colorAdjustments != null) colorAdjustments.postExposure.Override(pickupPostExposure);
+        if (fog != null) fog.fogStartDistance.Override(pickupFogDistance);
+
+        // 拾取后雾气消散完成，同步禁用 Invisible Plane，允许玩家穿过
+        if (invisiblePlane != null)
+        {
+            var col = invisiblePlane.GetComponent<Collider>();
+            if (col != null) col.enabled = false;
+            invisiblePlane.gameObject.SetActive(false);
+        }
     }
     
     private IEnumerator CylinderTransition()
