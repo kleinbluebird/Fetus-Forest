@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6e0293d0a4dc74baabdbc9bbab54548a
+guid: 3bbc1bc69a224446a953ed0e61ac6426
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,13 +97,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: F_Notice_0
+      name: Dive_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 180
-        height: 180
+        height: 402
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -112,8 +112,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7ef0f9b3c56be4d739c6c37f9e682de6
-      internalID: -659356959
+      spriteID: 99910b005dfe54c7e90db3e0f2b7082e
+      internalID: 2000100441
       vertices: []
       indices: 
       edges: []
@@ -122,7 +122,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: d0ca203c22e18434b9872c7d41a68107
+    spriteID: e2d269a9f8fe241f18c26248d08295ff
     internalID: 0
     vertices: []
     indices: 
@@ -132,7 +132,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      F_Notice_0: -659356959
+      Dive_0: 2000100441
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

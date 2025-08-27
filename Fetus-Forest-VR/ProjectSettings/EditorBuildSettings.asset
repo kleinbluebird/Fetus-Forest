@@ -12,11 +12,17 @@ EditorBuildSettings:
     path: Assets/Resources/Scenes/BeginningPage.unity
     guid: 7e8c8b19f0a53445ba77cbd4c12037b2
   - enabled: 1
+    path: Assets/Resources/Scenes/IntroPage.unity
+    guid: 89e86423c603f4f509cc86c54beb2495
+  - enabled: 1
     path: Assets/Resources/Scenes/Chapter_0.unity
     guid: 91e54f48e32d94567abcab68b042d17d
   - enabled: 1
     path: Assets/Resources/Scenes/Chapter_1.unity
     guid: 12cc1943ace18439bbdf9cd31749be5e
+  - enabled: 1
+    path: Assets/Resources/Scenes/Chapter_2.unity
+    guid: dbfc20df293154f3fa7e264994c26470
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: dc6229024225a4b31aed5015a419186c, type: 3}
   m_UseUCBPForAssetBundles: 0

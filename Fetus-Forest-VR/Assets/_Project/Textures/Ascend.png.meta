@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6e0293d0a4dc74baabdbc9bbab54548a
+guid: 5a7c50bdacfbc4ca3bbd9ee879f5901e
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,13 +97,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: F_Notice_0
+      name: Ascend_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 180
-        height: 180
+        height: 402
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -112,8 +112,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7ef0f9b3c56be4d739c6c37f9e682de6
-      internalID: -659356959
+      spriteID: 52c3103f44fb846b2964a19391c33f64
+      internalID: 1979448782
       vertices: []
       indices: 
       edges: []
@@ -122,7 +122,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: d0ca203c22e18434b9872c7d41a68107
+    spriteID: 3302f193f5d444ce1b7fe4ec629844a4
     internalID: 0
     vertices: []
     indices: 
@@ -132,7 +132,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      F_Notice_0: -659356959
+      Ascend_0: 1979448782
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
