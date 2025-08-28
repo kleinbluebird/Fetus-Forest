@@ -46,6 +46,9 @@ public class SilkUIController : MonoBehaviour
 	// 不再使用拾取延时，改为锁定目标位置
 	private float achievedAlpha;         // 已达成的最大 Alpha（阶段内单调不降）
 	
+	// 新增：临时禁用呼吸效果的标志
+	private bool isBreathDisabled = false;
+	
 	// 事件回调
 	public System.Action<float> OnAlphaChanged;  // Alpha 值变化时的回调
 	
@@ -198,6 +201,9 @@ public class SilkUIController : MonoBehaviour
 		if (!enableScaleBreath) return;
 		if (!transform) return;
 		if (scaleCycleSeconds <= 0.0001f) scaleCycleSeconds = 1.0f;
+		
+		// 新增：检查是否被临时禁用
+		if (isBreathDisabled) return;
 
 		float phase = (Time.time % scaleCycleSeconds) / scaleCycleSeconds; // 0..1
 		float s = Mathf.Lerp(scaleMin, scaleMax, 0.5f * (1f + Mathf.Sin(phase * Mathf.PI * 2f)));
@@ -229,6 +235,28 @@ public class SilkUIController : MonoBehaviour
 		
 		currentAlpha = Mathf.Clamp01(alpha);
 		SetImageAlpha(currentAlpha);
+	}
+	
+	// 新增：临时禁用呼吸效果（用于环境过渡动画期间）
+	// 注意：在环境过渡动画结束后，呼吸效果将保持禁用状态
+	// 这是为了确保动画的稳定性和连续性，特别是在即将白场过渡到新场景的情况下
+	public void DisableBreathEffect()
+	{
+		isBreathDisabled = true;
+		Debug.Log("[SilkUIController] 呼吸效果已临时禁用");
+	}
+	
+	// 新增：重新启用呼吸效果
+	public void EnableBreathEffect()
+	{
+		isBreathDisabled = false;
+		Debug.Log("[SilkUIController] 呼吸效果已重新启用");
+	}
+	
+	// 新增：检查呼吸效果是否被禁用
+	public bool IsBreathEffectDisabled()
+	{
+		return isBreathDisabled;
 	}
 	
 }

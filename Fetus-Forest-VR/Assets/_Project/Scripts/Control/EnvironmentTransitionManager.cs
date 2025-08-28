@@ -48,7 +48,7 @@ public class EnvironmentTransitionManager : MonoBehaviour
     [Header("Post & Fog Parameters")]
     public float initialPostExposure = 0.64f;
     public float pickupPostExposure = 0.48f;
-    public float initialFogDistance = -50f;        // 初始“Distance Density”对应的近距离（用Fog.fogStartDistance表示）
+    public float initialFogDistance = -50f;        // 初始"Distance Density"对应的近距离（用Fog.fogStartDistance表示）
     public float minApproachFogDistance = -200f;   // 玩家接近Invisible Plane时单向靠近的极限
     public float pickupFogDistance = 30f;          // 拾取后快速散开的目标
     public float pickupTransitionDuration = 0.6f;  // 拾取后过渡时长
@@ -74,6 +74,13 @@ public class EnvironmentTransitionManager : MonoBehaviour
     private ColorAdjustments colorAdjustments;
     private float bestVerticalDistance = float.MaxValue; // 历史最小 |player.y - plane.y|
     private bool pickupTransitionTriggered;
+
+    // 新增：Silk UI 旋转相关的四元数变量
+    private Quaternion silkStartRotation;
+    private Quaternion silkTargetRotation;
+    
+    // 新增：SilkUIController 引用，用于临时禁用呼吸效果
+    private SilkUIController silkUIController;
 
     private void Start()
     {
@@ -110,11 +117,34 @@ public class EnvironmentTransitionManager : MonoBehaviour
         {
             fog.fogStartDistance.Override(initialFogDistance);
         }
+
+        // 初始化 Silk UI 旋转的四元数变量
+        if (silkUITransform != null)
+        {
+            silkStartRotation = silkUITransform.localRotation;
+            // 计算目标旋转：在起始旋转基础上增加Z轴角度
+            silkTargetRotation = silkStartRotation * Quaternion.Euler(0f, 0f, silkRotationZDelta);
+            
+            // 获取 SilkUIController 引用
+            silkUIController = silkUITransform.GetComponent<SilkUIController>();
+            if (silkUIController != null)
+            {
+                Debug.Log("[EnvironmentTransition] 找到 SilkUIController，将在动画期间临时禁用呼吸效果");
+            }
+        }
     }
 
     public void TriggerEnvironmentTransition()
     {
         Debug.Log("[EnvironmentTransition] 启动环境过渡效果");
+        
+        // 新增：在动画开始前禁用 SilkUIController 的呼吸效果
+        if (silkUIController != null)
+        {
+            silkUIController.DisableBreathEffect();
+            Debug.Log("[EnvironmentTransition] 已禁用 SilkUIController 呼吸效果");
+        }
+        
         StartCoroutine(DollyAndRotateRoutine());
     }
 
@@ -138,7 +168,7 @@ public class EnvironmentTransitionManager : MonoBehaviour
         // 记录Silk UI初始状态
         float silkStartAlpha = 0f;
         float silkStartScale = 1f;
-        float silkStartRotZ = 0f;
+        // 移除旧的欧拉角记录，使用四元数
         if (silkUIImage != null)
         {
             Color c = silkUIImage.color;
@@ -147,7 +177,12 @@ public class EnvironmentTransitionManager : MonoBehaviour
         if (silkUITransform != null)
         {
             silkStartScale = silkUITransform.localScale.x;
-            silkStartRotZ = silkUITransform.localEulerAngles.z;
+            // 确保四元数变量已正确初始化
+            if (silkStartRotation == Quaternion.identity)
+            {
+                silkStartRotation = silkUITransform.localRotation;
+                silkTargetRotation = silkStartRotation * Quaternion.Euler(0f, 0f, silkRotationZDelta);
+            }
         }
         // float startNormalized = dolly.CameraPosition;
         // float targetNormalized = 0.43f;
@@ -204,14 +239,33 @@ public class EnvironmentTransitionManager : MonoBehaviour
                 {
                     float s = Mathf.Lerp(silkStartScale, silkTargetScale, smoothT2);
                     silkUITransform.localScale = new Vector3(s, s, s);
-                    Vector3 euler = silkUITransform.localEulerAngles;
-                    euler.z = Mathf.LerpAngle(silkStartRotZ, silkStartRotZ + silkRotationZDelta, smoothT2);
-                    silkUITransform.localEulerAngles = euler;
+                    // 使用四元数插值进行旋转
+                    Quaternion newRotation = Quaternion.Slerp(silkStartRotation, silkTargetRotation, smoothT2);
+                    silkUITransform.localRotation = newRotation;
+                    
+                    // 注释掉：每10帧输出一次调试信息，避免日志过多
+                    // if (Mathf.FloorToInt(elapsed * 60) % 10 == 0)
+                    // {
+                    //     Debug.Log($"[EnvironmentTransition] 动画进度: {t:F2}, 当前旋转: {newRotation.eulerAngles}, 目标旋转: {silkTargetRotation.eulerAngles}");
+                    // }
                 }
+            }
+            
+            // 新增：每帧强制设置scale，防止其他脚本干扰
+            if (silkUITransform != null && silkUIController != null && silkUIController.IsBreathEffectDisabled())
+            {
+                float currentT = Mathf.Clamp01(elapsed / fovDuration);
+                float smoothT = Mathf.SmoothStep(0f, 1f, currentT);
+                float s = Mathf.Lerp(silkStartScale, silkTargetScale, smoothT);
+                silkUITransform.localScale = new Vector3(s, s, s);
             }
 
             yield return null;
         }
+
+        // 确保完全达到目标时间后再进行最终状态设置
+        // 添加一帧延迟确保所有插值计算完成
+        yield return null;
 
         // 确保最终值（避免后续白场过渡阶段的跳变）
         if (trackVCam != null)
@@ -231,18 +285,79 @@ public class EnvironmentTransitionManager : MonoBehaviour
         {
             float finalS = silkTargetScale;
             silkUITransform.localScale = new Vector3(finalS, finalS, finalS);
-            Vector3 euler = silkUITransform.localEulerAngles;
-            // 将Z锁定到期望的最终值，避免角度插值与欧拉包裹导致的跳变
-            float targetZ = silkStartRotZ + silkRotationZDelta;
-            // 归一化到0..360，减少跨周跳变风险
-            targetZ = (targetZ % 360f + 360f) % 360f;
-            euler.z = targetZ;
-            silkUITransform.localEulerAngles = euler;
+            // 使用四元数锁定最终旋转
+            silkUITransform.localRotation = silkTargetRotation;
         }
         
+        // 新增：额外的验证和修正，确保最终状态完全正确
+        if (silkUITransform != null)
+        {
+            // 注释掉：开始验证的调试信息
+            // Debug.Log($"[EnvironmentTransition] 开始验证 Silk UI 最终状态");
+            // Debug.Log($"[EnvironmentTransition] 目标缩放: {silkTargetScale}, 目标旋转: {silkTargetRotation.eulerAngles}");
+            
+            // 验证缩放值
+            Vector3 currentScale = silkUITransform.localScale;
+            // 注释掉：当前缩放的调试信息
+            // Debug.Log($"[EnvironmentTransition] 当前缩放: {currentScale}");
+            if (!Mathf.Approximately(currentScale.x, silkTargetScale) || 
+                !Mathf.Approximately(currentScale.y, silkTargetScale) || 
+                !Mathf.Approximately(currentScale.z, silkTargetScale))
+            {
+                silkUITransform.localScale = new Vector3(silkTargetScale, silkTargetScale, silkTargetScale);
+                Debug.Log("[EnvironmentTransition] Silk UI 缩放值已修正");
+            }
+            // 注释掉：缩放值无需修正的调试信息
+            // else
+            // {
+            //     Debug.Log("[EnvironmentTransition] Silk UI 缩放值无需修正");
+            // }
+            
+            // 验证旋转值
+            Quaternion currentRotation = silkUITransform.localRotation;
+            float angleDiff = Quaternion.Angle(currentRotation, silkTargetRotation);
+            // 注释掉：当前旋转和角度差异的调试信息
+            // Debug.Log($"[EnvironmentTransition] 当前旋转: {currentRotation.eulerAngles}, 角度差异: {angleDiff}");
+            if (angleDiff > 0.1f)
+            {
+                silkUITransform.localRotation = silkTargetRotation;
+                Debug.Log("[EnvironmentTransition] Silk UI 旋转值已修正");
+            }
+            // 注释掉：旋转值无需修正的调试信息
+            // else
+            // {
+            //     Debug.Log("[EnvironmentTransition] Silk UI 旋转值无需修正");
+            // }
+            
+            // 验证透明度
+            if (silkUIImage != null)
+            {
+                Color currentColor = silkUIImage.color;
+                // 注释掉：当前透明度的调试信息
+                // Debug.Log($"[EnvironmentTransition] 当前透明度: {currentColor.a}");
+                if (!Mathf.Approximately(currentColor.a, 1f))
+                {
+                    currentColor.a = 1f;
+                    silkUIImage.color = currentColor;
+                    Debug.Log("[EnvironmentTransition] Silk UI 透明度已修正");
+                }
+                // 注释掉：透明度无需修正的调试信息
+                // else
+                // {
+                //     Debug.Log("[EnvironmentTransition] Silk UI 透明度无需修正");
+                // }
+            }
+            
+            // 注释掉：最终状态验证完成的调试信息
+            // Debug.Log($"[EnvironmentTransition] Silk UI 最终状态验证完成");
+        }
 
         // 触发白场过渡到新场景
         StartCoroutine(FadeToWhiteAndLoadScene());
+        
+        // 移除：不需要重新启用呼吸效果，因为即将白场过渡到新场景
+        // 保持禁用状态可以确保动画的稳定性和连续性
+        Debug.Log("[EnvironmentTransition] Silk UI 动画完成，保持呼吸效果禁用状态以确保稳定性");
     }
 
     private void Update()

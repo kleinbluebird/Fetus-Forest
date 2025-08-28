@@ -13254,7 +13254,7 @@ MonoBehaviour:
   scaleCycleSeconds: 4
   gainPerMeter: 0.005
   approachEpsilon: 0.02
-  debugAlphaLog: 1
+  debugAlphaLog: 0
   debugEveryNFrames: 10
 --- !u!1 &1732644664
 GameObject:
@@ -14461,8 +14461,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
