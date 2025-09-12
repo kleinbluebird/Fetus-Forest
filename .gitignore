@@ -58,6 +58,10 @@ MemoryCaptures/
 # Wwise工程文件（压缩后存云盘）
 Assets/_SoundEngine/Wwise/
 
+# Wwise Soundbank音频文件包
+Assets/StreamingAssets/
+
+
 # 忽略视频文件（存云盘）
 *.mp4
 *.avi

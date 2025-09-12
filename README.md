@@ -139,3 +139,8 @@ Assets/_Project/VFX/**/*.mkv
 以下插件可能需要手动安装，可以在Unity-Window-Package Manager内Double Check
 
 1. Visual Effect Graph - 支持VFX
+
+# Wwise 文件管理
+Google云盘中
+Wwise文件夹路径为 Assets/Wwise
+StreamingAssets文件夹路径为 Assets/StreamingAssets
