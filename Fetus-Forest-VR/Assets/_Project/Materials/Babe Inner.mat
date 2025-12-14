@@ -1,0 +1,90 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-5339814601449524315
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 9
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Babe Inner
+  m_Shader: {fileID: 4800000, guid: f5cbdd554c80cf840960f02543c9e6a8, type: 3}
+  m_Parent: {fileID: 2100000, guid: a95c2a47f0a03464cb03122277a14df5, type: 2}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords:
+  - _RECEIVE_SHADOWS_OFF
+  - _SHADING_COLOR
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses:
+  - DepthOnly
+  - SHADOWCASTER
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs: []
+    m_Ints: []
+    m_Floats:
+    - _CellTransitionSmoothness: 0.347
+    - _EnableCastShadows: 0
+    - _EnableCastShadowsStyling: 0
+    - _EnableRimStyling: 1
+    - _EnableShadingStyling: 0
+    - _EnableShadows: 0
+    - _EnableStyling: 1
+    - _NumberOfCellsHatching: 1
+    - _OutlineWidth: 1.5
+    - _ReceiveShadows: 0
+    - _RimAffectedArea: 2
+    - _RimDrawSpace: 1
+    - _ShadingAffectedByNormalMap: 0
+    - _Smoothness: 0.038
+    - _StylingCastShadowsHardness: 0.81
+    - _StylingCastShadowsRotationBetweenCells: 85
+    - _StylingCastShadowsSyncWithOtherStyling: 4
+    - _StylingCastShadowsThickness: 0.9
+    - _StylingCastShadowsThicknessFalloff: 0.5
+    - _StylingOvermodelingFactor: 0.399
+    - _StylingRimHardness: 0.81
+    - _StylingRimRotation: 45
+    - _StylingRimSize: 0.222
+    - _StylingRimSmoothness: 0.279
+    - _StylingRimThickness: 0.9
+    - _StylingRimThicknessFalloff: 0.5
+    - _StylingShadingHardness: 0.81
+    - _StylingShadingRotationBetweenCells: 85
+    - _StylingShadingSyncWithOtherStyling: 4
+    - _StylingSpecularHardness: 0.81
+    - _StylingSpecularRotation: 45
+    - _StylingSpecularSyncWithOtherStyling: 1
+    - _StylingSpecularThickness: 0.9
+    - _StylingSpecularThicknessFalloff: 0.5
+    - _SumLightsBeforePosterization: 0
+    - _Surface: 1
+    - _SyncWithRim: 0
+    - _SyncWithSpecular: 0
+    m_Colors:
+    - _BaseColor: {r: 0.33962262, g: 0.33962262, b: 0.33962262, a: 0.21176471}
+    - _EmissionColor: {r: 0.9811321, g: 0.9811321, b: 0.9811321, a: 1}
+    - _OutlineColor: {r: 0.1792453, g: 0.1792453, b: 0.1792453, a: 1}
+    - _StylingColor: {r: 0.23584908, g: 0.23584908, b: 0.23584908, a: 1}
+    - _StylingRimColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
