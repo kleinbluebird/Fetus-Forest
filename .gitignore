@@ -40,9 +40,6 @@ MemoryCaptures/
 
 # --- 只提交 _Project 目录的必要文件 ---
 # 忽略 3D 模型源文件（FBX, OBJ, BLEND）和大贴图
-*.fbx
-*.obj
-*.blend
 *.tga
 *.psd
 *.hdr

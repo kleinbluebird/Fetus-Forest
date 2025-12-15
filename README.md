@@ -1,24 +1,14 @@
 # FF项目管理手册
 
-Latest Updated: April 29,2025
+Latest Updated: Aug 30,2025
 
 ## 资源管理策略
 
 - **Git** 仅用于版本控制代码（C#、Shader、配置文件、Wwise数据）。
 - **Google Drive** 用于存储大文件：
-    - 3D 资源（FBX、Texture）
     - 影片素材（MP4、EXR）
     - 音频文件（WAV、MP3、Wwise工程）
 
-**PRO：**
-
-- **Git 仓库保持轻量**，不受大文件限制，代码保证版本同步。
-
-**CON：**
-
-- **媒体资源等大文件，需要手动管理文件版本**，无法像 Git 一样进行版本控制。
-
-# 代码同步 - GitHub
 
 ## Unity 项目的文件存储结构
 
@@ -59,14 +49,6 @@ Latest Updated: April 29,2025
 ### **Google Drive内存储资源包括**
 
 ```jsx
-# 3D 模型源文件（FBX, OBJ, BLEND）和大贴图
-Assets/_Project/Models/**/*.fbx
-Assets/_Project/Models/**/*.obj
-Assets/_Project/Models/**/*.blend
-Assets/_Project/Textures/**/*.tga
-Assets/_Project/Textures/**/*.psd
-Assets/_Project/Textures/**/*.tiff
-Assets/_Project/Textures/**/*.exr
 
 # 大音频文件
 Assets/_Project/Audio/**/*.wav
@@ -85,7 +67,6 @@ Assets/_Project/VFX/**/*.mkv
 
 - Assets目录下的以上后缀资源不会上传git
 - 为了项目从GitHub Download后能正常运行，需要手动在Unity内配置相关资源
-- 建议在Google Drive新建文件夹同步为Unity内Assets目录下的文件存储结构，便于手动同步
 
 ## Unity Push To GitHub
 
@@ -129,7 +110,6 @@ Assets/_Project/VFX/**/*.mkv
 
     
 - ⚠️ **大文件（音频、图像）有更新注意同步到Google Drive**
-    - **3D 资源**（FBX, OBJ, BLEND）：请存放到 Google Drive。
     - **高清贴图**（PSD, TGA, EXR）：请存放到 Google Drive，Git 只存 PNG 版本。
     - **音频文件**（WAV, MP3）：请存放到 Google Drive，Git 只存 OGG 或 AAC。
     - **视频文件**（MP4, MOV）：存 Google Drive，Git 仅存低分辨率参考版。
@@ -139,3 +119,6 @@ Assets/_Project/VFX/**/*.mkv
 以下插件可能需要手动安装，可以在Unity-Window-Package Manager内Double Check
 
 1. Visual Effect Graph - 支持VFX
+2. The Toon Shader - 3D渲染2D，外部资源包导入
+3. Cinemachine - 摄像机控制
+4. Input System - 输入操作配置
